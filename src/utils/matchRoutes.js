@@ -1,4 +1,4 @@
-import allRouter from './routers';
+import allRouter from '@/consts/routers';
 
 function getAllRoutes() {
   let routersArray = [];

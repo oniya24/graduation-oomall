@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { TabBar, NavBar, Icon } from 'antd-mobile';
 import { history } from 'umi';
-import { basicRoutes as routers } from '../../Routes/routers';
-import BlankLayout from '../BlankLayout';
-import { matchAllRoute, matchRoute } from '../../Routes/matchRoutes';
+import { basicRoutes as routers } from '@/consts/routers';
+import { matchAllRoute, matchRoute } from '@/utils/matchRoutes';
 import styles from './index.scss';
 export default function BasicLayout(props) {
   const { location } = history;
