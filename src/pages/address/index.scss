@@ -1,0 +1,28 @@
+.address_contain {
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  position: relative;
+}
+
+.item_contain {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 15px;
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  span {
+    margin: 0 5px
+  }
+}
+
+.address_add {
+  position: fixed; 
+  width: 4rem;
+  height: 4rem;
+  bottom: 4rem;
+  left: 1rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+}

@@ -1,0 +1,43 @@
+.floatContain{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 15px;
+  z-index: 100;
+  background-color: #ffffff;
+  border-radius: 5px 5px 0px 0px;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+.item_contain{
+  margin-bottom: 1px;
+  padding: 0px 15px;
+  border-radius: 5px;
+}
+.flex_row_space_around {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex_row_space_between {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex_column_space_around {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+}

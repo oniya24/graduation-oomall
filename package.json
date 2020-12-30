@@ -1,0 +1,45 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^6.5.0",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.3.2",
+    "ahooks": "^2.9.2",
+    "antd-mobile": "^2.3.4",
+    "antd-mobile-demo-data": "^0.3.0",
+    "node-sass": "^5.0.0",
+    "rc-form": "^2.4.11",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "sass-loader": "^10.1.0",
+    "umi": "^3.3.2",
+    "yorkie": "^2.0.0"
+  },
+  "devDependencies": {
+    "@umijs/plugin-sass": "^1.1.1",
+    "lint-staged": "^10.0.7",
+    "mockjs": "^1.1.0",
+    "prettier": "^1.19.1"
+  }
+}

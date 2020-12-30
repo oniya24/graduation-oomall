@@ -1,0 +1,10 @@
+.linear-title {
+    span {
+        background: linear-gradient(90deg, red, blue);
+        -webkit-background-clip: text !important;
+        font-weight: lighter;
+        color: transparent;
+        font-size: 16px;
+        font-weight: 600;
+    }
+}
