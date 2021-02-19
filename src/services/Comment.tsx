@@ -1,11 +1,12 @@
 import { request } from 'umi';
+import { goodsPrefix } from '@/consts/routers';
 /**
  * comment: 评论模块
  */
 
 /** 买家查看自己的评价记录 */
 export const getAllCommentsReq = (params: any) => {
-  return request(`/comments`, {
+  return request(`${goodsPrefix}/comments`, {
     method: 'get',
     params: params,
   });
@@ -19,7 +20,7 @@ export const getSkuCommentsReq = ({
   id: number;
   params: any;
 }) => {
-  return request(`/skus/${id}/comments`, {
+  return request(`${goodsPrefix}/skus/${id}/comments`, {
     method: 'get',
     params: params,
   });
@@ -27,7 +28,7 @@ export const getSkuCommentsReq = ({
 
 /** 买家新增sku的评论 */
 export const postSkuCommentReq = ({ id, data }: { id: number; data: any }) => {
-  return request(`/orderitems/${id}/comments`, {
+  return request(`${goodsPrefix}/orderitems/${id}/comments`, {
     method: 'post',
     data: data,
   });

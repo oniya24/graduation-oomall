@@ -1,4 +1,5 @@
 import { request } from 'umi';
+import { goodsPrefix } from '@/consts/routers';
 /**
  * 首页：
  * 部分advertisem、groupon\presale、flashsale模块
@@ -11,7 +12,7 @@ export const getCurrentAdvertisementReq = () => {
 
 /** 查询所有团购活动 */
 export const getAllGrouponReq = (params: any) => {
-  return request(`/groupons`, {
+  return request(`${goodsPrefix}/groupons`, {
     method: 'get',
     params: params,
   });
