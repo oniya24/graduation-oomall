@@ -4,20 +4,12 @@ import { createForm } from 'rc-form';
 import { List, Picker, Button, InputItem, TextareaItem } from 'antd-mobile';
 import { district } from 'antd-mobile-demo-data';
 import { useEffect } from 'react';
+import { validateFormError } from '@/utils/validate';
 const address_edit = ({ form, postAddress }) => {
   const { getFieldProps, validateFields } = form;
   const submit = () => {
     validateFields((error, value) => {
-      if (error !== null) {
-        const errMsg = error[Object.keys(error)[0]].errors[0].message;
-        console.log('error', errMsg);
-        Modal.alert('', errMsg, [
-          {
-            text: '好的',
-            style: { color: 'GrayText' },
-          },
-        ]);
-      } else {
+      if (!validateFormError(error)) {
         postAddress({ value });
       }
     });

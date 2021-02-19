@@ -1,74 +1,171 @@
-// import React, { Component } from 'react'
-// import './index.scss'
-// import { mapStateToProps, mapDispatchToProps } from '@/models/User';
-// import { connect } from 'umi';
+import { useState } from 'react';
+import { mapStateToProps, mapDispatchToProps } from '@/models/User';
+import { connect } from 'umi';
+import { List, InputItem, Card, Button, Picker, DatePicker } from 'antd-mobile';
+import { createForm } from 'rc-form';
+import { validateFormError } from '@/utils/validate';
+import styles from './index.scss';
+const login = ({ postUserLogin, postUserReq, form }) => {
+  const [userState, setUserState] = useState(false);
+  const {
+    getFieldProps,
+    validateFields,
+    setFieldsInitialValue,
+    getFieldError,
+    setFieldsValue,
+  } = form;
+  const submitLogin = () => {
+    validateFields((error, value) => {
+      console.log(error, value);
+      if (!validateFormError(error)) {
+        postUserLogin(value);
+      }
+    });
+  };
+  const submitRegister = () => {
+    validateFields((error, value) => {
+      console.log(error, value);
+      if (!validateFormError(error)) {
+        postUserReq(value);
+      }
+    });
+  };
+  return (
+    <div className={styles.login_contain}>
+      <Card style={{ height: '100%', width: '100%', padding: 10 }}>
+        {!userState && (
+          <List>
+            <InputItem
+              title={<span>13513</span>}
+              className={styles.form_item}
+              {...getFieldProps('userName', {
+                rules: [{ required: true, message: '请输入用户名' }],
+              })}
+              placeholder={'用户名'}
+            >
+              <span className={styles.form_item_placeholderStyle}>用户名</span>
+            </InputItem>
+            <InputItem
+              className={styles.form_item}
+              {...getFieldProps('password', {
+                rules: [{ required: true, message: '请输入密码' }],
+              })}
+              placeholder={'密码'}
+            >
+              <span className={styles.form_item_placeholderStyle}>密码</span>
+            </InputItem>
+            <Button onClick={submitLogin} className={styles.form_item_submit}>
+              登录
+            </Button>
+          </List>
+        )}
+        {userState && (
+          <List>
+            <InputItem
+              className={styles.form_item}
+              {...getFieldProps('userName', {
+                rules: [{ required: true, message: '请输入用户名' }],
+              })}
+              placeholder={'用户名'}
+            >
+              <span className={styles.form_item_placeholderStyle}>用户名</span>
+            </InputItem>
+            <InputItem
+              className={styles.form_item}
+              {...getFieldProps('password', {
+                rules: [{ required: true, message: '请输入密码' }],
+              })}
+              placeholder={'密码'}
+            >
+              <span className={styles.form_item_placeholderStyle}>密码</span>
+            </InputItem>
+            <InputItem
+              className={styles.form_item}
+              {...getFieldProps('mobile', {
+                rules: [{ required: true, message: '请输入手机号' }],
+              })}
+              type="phone"
+              placeholder={'手机号码'}
+            >
+              <span className={styles.form_item_placeholderStyle}>手机号</span>
+            </InputItem>
+            <InputItem
+              className={styles.form_item}
+              {...getFieldProps('email', {
+                rules: [{ required: true, message: '请输入邮箱' }],
+              })}
+              type="email"
+              placeholder={'邮箱'}
+            >
+              <span className={styles.form_item_placeholderStyle}>邮箱</span>
+            </InputItem>
+            <InputItem
+              className={styles.form_item}
+              {...getFieldProps('realName', {
+                rules: [{ required: true, message: '请输入真实姓名' }],
+              })}
+              placeholder={'姓名'}
+            >
+              <span className={styles.form_item_placeholderStyle}>
+                真实姓名
+              </span>
+            </InputItem>
+            <DatePicker
+              extra=""
+              mode="date"
+              title="选择你的生日"
+              initialState={Date.now()}
+              {...getFieldProps('birthday', {
+                rules: [{ required: true, message: '请选择你的生日' }],
+              })}
+            >
+              <List.Item arrow="horizontal">
+                <span className={styles.form_item_placeholderStyle}>生日</span>
+              </List.Item>
+            </DatePicker>
+            <Picker
+              extra=""
+              cols={1}
+              data={[
+                { value: 1, label: '男生' },
+                { value: 0, label: '女生' },
+              ]}
+              title="性别"
+              {...getFieldProps('gender', {
+                rules: [{ required: true, message: '请选择你的性别' }],
+              })}
+            >
+              <List.Item arrow="horizontal">
+                <span className={styles.form_item_placeholderStyle}>性别</span>
+              </List.Item>
+            </Picker>
+            <Button onClick={submitLogin} className={styles.form_item_submit}>
+              注册
+            </Button>
+          </List>
+        )}
+        <div className={styles.form_item_spaceBetween}>
+          <span
+            onClick={() => {
+              console.log('false');
+              setUserState(false);
+            }}
+          >
+            账号密码登录
+          </span>
+          <span
+            onClick={() => {
+              console.log('true');
+              setUserState(true);
+            }}
+          >
+            新用户注册
+          </span>
+        </div>
+      </Card>
+    </div>
+  );
+};
 
-// class LoginPage extends Component {
-//     constructor(props) {
-//         super(props);
-//         console.log(props);
-
-//         this.state = {
-//             name: ''
-//         }
-
-//     }
-
-//     render() {
-//         const { login, isLogin, location, err } = this.props;
-//         const { name } = this.state;
-//         if (isLogin) {
-//             const { redirect = "/" } = location.state || {};
-//             return <Redirect to={redirect} />;
-//         }
-//         return (
-//             <div className='login' >
-//                 <div className='Form'>
-//                     <div className='FormItem'>
-//                         <input className='FormInput' placeholder='请输入用户名' value={name} onChange={(event) => this.setState({ name: event.target.value })} />
-//                     </div>
-//                     <div className='FormItem'>
-//                         <input className='FormInput' placeholder='请输入密码' type="password" />
-//                     </div>
-//                     <div className='FormItem'>
-//                         <button className='FormButton' onClick={() => { login({ name }) }}>登录</button>
-//                     </div>
-
-//                     {err.msg && <div className='err'>{err.msg}</div>}
-
-//                 </div>
-
-//                 <div className='loginTools'>
-//                     <span>账号密码登录</span>
-//                     <span>手机快速注册</span>
-//                 </div>
-
-//                 <div className='loginOthers'>
-//                     <div className='title'>
-//                         <span className='line'></span>
-//                         <span className='content'>其他登录方式</span>
-//                     </div>
-//                     <div className='list'>
-//                         <div className='item'>
-//                             {/* <div className='icon'></div> */}
-//                             <img src={qq} alt='icon' />
-//                             <span>qq</span>
-//                         </div>
-//                         <div className='item'>
-//                             {/* <div className='icon'></div> */}
-//                             <img src={wx} alt='icon' />
-//                             <span>wx</span>
-//                         </div>
-//                         <div className='item'>
-//                             {/* <div className='icon'></div> */}
-//                             <img src={pg} alt='icon' />
-//                             <span>pg</span>
-//                         </div>
-//                     </div>
-//                     <div className='Introduction'>xxx相关负责协议请确定后选择同意</div>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+const wrapper_login = createForm()(login);
+export default connect(mapStateToProps, mapDispatchToProps)(wrapper_login);

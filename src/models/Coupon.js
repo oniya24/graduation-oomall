@@ -8,7 +8,7 @@ import {
   defaultMapStateToProps,
   defaultMapDispatchToProps,
 } from '@/utils/reduxUtil.tsx';
-const namespace = 'template';
+const namespace = 'coupon';
 const model = {
   namespace,
   state: {

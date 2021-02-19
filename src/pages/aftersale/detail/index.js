@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Card, Button, Steps, List, InputItem, Modal } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { aftersaleTypesPlain } from '@/consts/mall';
+import { validateFormError } from '@/utils/validate';
 import styles from './index.scss';
 
 const { Step } = Steps;
@@ -46,19 +47,9 @@ const aftersale_detail = ({
   const { id } = query;
   const putSendback = () => {
     validateFields(async (error, value) => {
-      if (error !== null) {
-        const errMsg = error[Object.keys(error)[0]].errors[0].message;
-        console.log('error', errMsg);
-        Modal.alert('', errMsg, [
-          {
-            text: '好的',
-            style: { color: 'GrayText' },
-          },
-        ]);
-      } else {
-        putAftersaleSendback({ id, ...value }).then(() => {
-          getAftersaleById(id);
-        });
+      if (!validateFormError(error)) {
+        await putAftersaleSendback({ id, ...value });
+        await getAftersaleById(id);
       }
     });
   };

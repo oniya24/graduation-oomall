@@ -34,6 +34,13 @@ const model = {
     },
     *postPayRecord({ payload }, { call, put }) {
       const res = yield call(postPayRecordReq, payload);
+      const { data } = res;
+      yield put({
+        type: 'save',
+        payload: {
+          payRecord: data,
+        },
+      });
     },
     *getPayRecordById({ payload }, { call, put }) {
       const res = yield call(getPayRecordByIdReq, payload);

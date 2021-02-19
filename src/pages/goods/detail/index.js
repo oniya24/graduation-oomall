@@ -1,13 +1,16 @@
 import { mapStateToProps, mapDispatchToProps } from '@/models/Goods';
-import { connect } from 'umi';
-const goods_detail = ({
-  brandList,
-  subcategories,
-  getSubCategoryById,
-  getAllBrand,
-}) => {
+import { connect, useLocation } from 'umi';
+import { Card } from 'antd-mobile';
+import { useEffect } from 'react';
+const goods_detail = ({ getSkuById, getGoodSpuById, goodSpu, goodSku }) => {
+  useEffect(() => {
+    getSkuById();
+    getGoodSpuById();
+  }, []);
   return (
-    <div style={{ height: '100%', width: '100%', position: 'relative' }}></div>
+    <Card
+      style={{ height: '100%', width: '100%', position: 'relative' }}
+    ></Card>
   );
 };
 

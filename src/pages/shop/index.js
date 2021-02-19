@@ -1,4 +1,4 @@
-// import { mapStateToProps, mapDispatchToProps } from '@/models/Shop';
+// import { mapStateToProps, mapDispatchToProps } from '@/models/Coupon';
 import { compactMapState, compactMapDispatch } from '@/utils/reduxUtil';
 import { connect, history } from 'umi';
 import { Card } from 'antd-mobile';

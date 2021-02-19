@@ -15,7 +15,19 @@ const namespace = 'user';
 const model = {
   namespace,
   state: {
-    userInfo: {},
+    userInfo: {
+      id: 0,
+      userName: 'string',
+      realName: 'string',
+      mobile: 'string',
+      email: 'string',
+      gender: '0',
+      birthday: '2021-06-03',
+      state: 0,
+      point: 0,
+      gmtCreate: 'string',
+      gmtModified: 'string',
+    },
   },
   effects: {
     *postUser({ payload }, { call, put }) {

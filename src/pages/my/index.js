@@ -30,6 +30,9 @@ const my = () => {
   return (
     <WingBlank>
       131313 这是我的内容
+      <Card onClick={() => history.push('my/info/')}>
+        <Card.Header title="这里是头像，点击头像进入个人信息页" />
+      </Card>
       <Card>
         <Card.Body>
           {routesData.map(item => {

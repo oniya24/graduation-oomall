@@ -11,6 +11,7 @@ import {
   Modal,
 } from 'antd-mobile';
 import { aftersaleTypes } from '@/consts/mall';
+import { validateFormError } from '@/utils/validate';
 
 const aftersale_create = ({ postAftersale, form }) => {
   const {
@@ -29,16 +30,7 @@ const aftersale_create = ({ postAftersale, form }) => {
   // "mobile": "string"
   const submit = () => {
     validateFields((error, value) => {
-      console.log(value);
-      if (error !== null) {
-        const errMsg = error[Object.keys(error)[0]].errors[0].message;
-        Modal.alert('', errMsg, [
-          {
-            text: '好的',
-            style: { color: 'GrayText' },
-          },
-        ]);
-      } else {
+      if (!validateFormError(error)) {
         postAftersale(value);
       }
     });

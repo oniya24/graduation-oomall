@@ -12,6 +12,7 @@ import {
 } from 'antd-mobile';
 import { district } from 'antd-mobile-demo-data';
 import { useEffect } from 'react';
+import { validateFormError } from '@/utils/validate';
 const address_edit = ({
   form,
   addressDetail,
@@ -28,16 +29,7 @@ const address_edit = ({
   const { consignee, mobile, regionId, detail, id, isDefault } = addressDetail;
   const submit = () => {
     validateFields((error, value) => {
-      if (error !== null) {
-        const errMsg = error[Object.keys(error)[0]].errors[0].message;
-        console.log('error', errMsg);
-        Modal.alert('', errMsg, [
-          {
-            text: '好的',
-            style: { color: 'GrayText' },
-          },
-        ]);
-      } else {
+      if (!validateFormError(error)) {
         const { isDefault, ...params } = value;
         isDefault && putDefaultAddress(id); // 设置为默认地址
         putAddressById({ ...params, id });
