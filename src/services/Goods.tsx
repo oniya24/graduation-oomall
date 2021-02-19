@@ -6,7 +6,7 @@ import { goodsPrefix } from '@/consts/routers';
 
 /** 查询sku */
 export const getAllSkuReq = (params: any) => {
-  return request(`${goodsPrefix}skus`, {
+  return request(`${goodsPrefix}/skus`, {
     method: 'get',
     params: params,
   });
