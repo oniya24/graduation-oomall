@@ -13,7 +13,29 @@ const model = {
   namespace,
   state: {
     presaleList: [],
-    grouponList: [],
+    grouponList: [
+      {
+        id: 0,
+        name: '厂家直销',
+        beginTime: 'string',
+        endTime: 'string',
+        url: 'http://oomall.finetoo.top/static/groupon/groupon1.jpg',
+      },
+      {
+        id: 1,
+        name: '超级大酬宾',
+        beginTime: 'string',
+        endTime: 'string',
+        url: 'http://oomall.finetoo.top/static/groupon/groupon2.png',
+      },
+      {
+        id: 2,
+        name: '超级大酬宾',
+        beginTime: 'string',
+        endTime: 'string',
+        url: 'http://oomall.finetoo.top/static/groupon/groupon3.jpg',
+      },
+    ],
     advertisementList: [],
     flashList: [],
     segmentFlashList: [],

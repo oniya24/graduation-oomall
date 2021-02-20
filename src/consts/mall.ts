@@ -24,3 +24,38 @@ export const orderStatePlain: Array<string> = [
   '评价',
   '售后',
 ];
+
+export const favoAndShareData = [
+  {
+    title: '收藏',
+    path: '/favorite',
+    icon:
+      'url(http://oomall.finetoo.top/static/favorite.svg) center center /  24px 24px no-repeat',
+  },
+  {
+    title: '分享',
+    path: '/share',
+    icon:
+      'url(http://oomall.finetoo.top/static/share.svg) center center /  24px 24px no-repeat',
+  },
+];
+export const orderRelatedData = [
+  {
+    title: '订单',
+    path: '/order',
+    icon:
+      'url(http://oomall.finetoo.top/static/order.svg) center center /  24px 24px no-repeat',
+  },
+  {
+    title: '售后',
+    path: '/aftersale',
+    icon:
+      'url(http://oomall.finetoo.top/static/aftersale.svg) center center /  24px 24px no-repeat',
+  },
+  {
+    title: '评论内容',
+    path: '/comment',
+    icon:
+      'url(http://oomall.finetoo.top/static/comment.svg) center center /  24px 24px no-repeat',
+  },
+];

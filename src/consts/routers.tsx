@@ -7,20 +7,20 @@ const basicRoutes = [
     isNav: true,
     props: { exact: true },
     icon:
-      'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat',
+      'url(http://oomall.finetoo.top/static/home_not_selected.svg) center center /  24px 24px no-repeat',
     selectedIcon:
-      'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat',
+      'url(http://oomall.finetoo.top/static/home_selected.svg) center center / 24px 24px no-repeat',
   },
   {
-    path: '/type',
+    path: '/category',
     title: '分类',
     showTopBar: true,
     showFootBar: true,
     isNav: true,
     icon:
-      'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat',
+      'url(http://oomall.finetoo.top/static/category_not_selected.svg) center center /  24px 24px no-repeat',
     selectedIcon:
-      'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat',
+      'url(http://oomall.finetoo.top/static/category_selected.svg) center center / 24px 24px no-repeat',
   },
   {
     path: '/cart',
@@ -29,9 +29,9 @@ const basicRoutes = [
     showFootBar: true,
     isNav: true,
     icon:
-      'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat',
+      'url(http://oomall.finetoo.top/static/cart_not_selected.svg) center center /  24px 24px no-repeat',
     selectedIcon:
-      'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat',
+      'url(http://oomall.finetoo.top/static/cart_selected.svg) center center / 24px 24px no-repeat',
   },
   {
     path: '/my',
@@ -39,9 +39,10 @@ const basicRoutes = [
     showTopBar: true,
     showFootBar: true,
     isNav: true,
-    icon: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg',
+    icon:
+      'url(http://oomall.finetoo.top/static/my_not_selected.svg) center center /  24px 24px no-repeat',
     selectedIcon:
-      'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg',
+      'url(http://oomall.finetoo.top/static/my_selected.svg) center center / 24px 24px no-repeat',
   },
 ];
 
