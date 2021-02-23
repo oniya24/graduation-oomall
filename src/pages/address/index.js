@@ -23,7 +23,11 @@ const address = ({
     history.push('/address/create');
   };
   useEffect(() => {
-    getAllAddress();
+    getAllAddress({
+      page: 1,
+      pageSize: 20,
+    });
+    getParentRegion(100000);
     saveDetail({});
   }, []);
   return (

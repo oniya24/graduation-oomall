@@ -1,4 +1,5 @@
 import { request } from 'umi';
+import { orderPrefix } from '@/consts/routers';
 
 interface registerData {
   mobile: string;
@@ -11,7 +12,7 @@ interface registerData {
 }
 // 用户注册
 export const postUserReq = (data: registerData) => {
-  return request('/users', {
+  return request(`${orderPrefix}/users`, {
     method: 'post',
     data: data,
   });
@@ -19,7 +20,7 @@ export const postUserReq = (data: registerData) => {
 
 // 买家查看自己信息
 export const getUserReq = () => {
-  return request('/users');
+  return request(`${orderPrefix}/users`);
 };
 
 interface modifyData {
@@ -29,7 +30,7 @@ interface modifyData {
 }
 // 买家修改自己的信息
 export const putUserReq = (data: modifyData) => {
-  return request('/users', {
+  return request(`${orderPrefix}/users`, {
     method: 'put',
     data: data,
   });
@@ -44,7 +45,7 @@ interface resetPassword {
   newPassword: string;
 }
 export const putUserPasswordReq = (data: resetPassword) => {
-  return request('/users/password', {
+  return request(`${orderPrefix}/users/password`, {
     method: 'put',
     data: data,
   });
@@ -56,7 +57,7 @@ interface authData {
   email: string;
 }
 export const getUserPasswordAuthCodeReq = (data: authData) => {
-  return request('/users/password/reset', {
+  return request(`${orderPrefix}/users/password/reset`, {
     method: 'put',
     data: data,
   });
@@ -67,7 +68,7 @@ interface loginData {
   password: string;
 }
 export const postUserLoginReq = (data: loginData) => {
-  return request('/users/login', {
+  return request(`${orderPrefix}/users/login`, {
     method: 'post',
     data: data,
   });
@@ -75,5 +76,5 @@ export const postUserLoginReq = (data: loginData) => {
 
 // 用户登出
 export const getUserLogoutReq = () => {
-  return request('/users/logout');
+  return request(`${orderPrefix}/users/logout`);
 };

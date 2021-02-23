@@ -76,12 +76,12 @@ export default [
 export const goodsPrefix: String =
   process.env.NODE_ENV == 'production'
     ? 'http://localhost:8081/goods'
-    : 'http://localhost:8081/goods';
+    : 'http://localhost:8081';
 export const orderPrefix: String =
   process.env.NODE_ENV == 'production'
-    ? 'http://localhost:8081/goods'
-    : 'http://localhost:8081/goods';
+    ? 'http://localhost:8082/goods'
+    : 'http://localhost:8082';
 export const otherPrefix: String =
   process.env.NODE_ENV == 'production'
-    ? 'http://localhost:8081/goods'
-    : 'http://localhost:8081/goods';
+    ? 'http://localhost:8083/goods'
+    : 'http://localhost:8083';

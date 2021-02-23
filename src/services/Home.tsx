@@ -1,5 +1,5 @@
 import { request } from 'umi';
-import { goodsPrefix } from '@/consts/routers';
+import { goodsPrefix, orderPrefix } from '@/consts/routers';
 /**
  * 首页：
  * 部分advertisem、groupon\presale、flashsale模块
@@ -7,7 +7,10 @@ import { goodsPrefix } from '@/consts/routers';
 
 /** 获取当前时段广告列表 */
 export const getCurrentAdvertisementReq = () => {
-  return request(`/advertisement/current`);
+  return request(`${orderPrefix}/advertisement/current`);
+};
+export const getAllAdvertisementReq = () => {
+  return request(`${orderPrefix}/advertisement/all`);
 };
 
 /** 查询所有团购活动 */

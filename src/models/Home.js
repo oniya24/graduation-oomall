@@ -1,7 +1,10 @@
 import {
   getCurrentAdvertisementReq,
+  getAllAdvertisementReq,
   getAllGrouponReq,
   getAllPresaleReq,
+  getCurrentflashReq,
+  getflashByTimeSegmentReq,
 } from '@/services/Home.tsx';
 import {
   defaultMapStateToProps,
@@ -37,6 +40,7 @@ const model = {
       },
     ],
     advertisementList: [],
+    allAdvertisementList: [],
     flashList: [],
     segmentFlashList: [],
   },
@@ -49,6 +53,17 @@ const model = {
         type: 'save',
         payload: {
           advertisementList: list,
+        },
+      });
+    },
+    *getAllAdvertisement({ payload }, { call, put }) {
+      const res = yield call(getAllAdvertisementReq, payload);
+      // const { data } = res;
+      // const { list } = data;
+      yield put({
+        type: 'save',
+        payload: {
+          allAdvertisementList: res,
         },
       });
     },

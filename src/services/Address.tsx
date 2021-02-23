@@ -1,11 +1,12 @@
 import { request } from 'umi';
+import { orderPrefix } from '@/consts/routers';
 /**
  * address: 地址模块
  */
 
 /** 买家查询所有已有的地址信息 */
 export const getAllAddressReq = (params: any) => {
-  return request('/addresses', {
+  return request(`${orderPrefix}/addresses`, {
     method: 'get',
     params: params,
   });
@@ -13,7 +14,7 @@ export const getAllAddressReq = (params: any) => {
 
 /** 买家新增地址 */
 export const postAddressReq = (data: any) => {
-  return request('/addresses', {
+  return request(`${orderPrefix}/addresses`, {
     method: 'post',
     data: data,
   });
@@ -21,7 +22,7 @@ export const postAddressReq = (data: any) => {
 
 /** 设置默认地址 */
 export const putDefaultAddressReq = (id: number) => {
-  return request(`/addresses/${id}/default`, {
+  return request(`${orderPrefix}/addresses/${id}/default`, {
     method: 'put',
   });
 };
@@ -34,7 +35,7 @@ export const putAddressByIdReq = ({
   id: number;
   data: any;
 }) => {
-  return request(`/addresses/${id}`, {
+  return request(`${orderPrefix}/addresses/${id}`, {
     method: 'put',
     data: data,
   });
@@ -42,12 +43,12 @@ export const putAddressByIdReq = ({
 
 /** 买家删除地址 */
 export const deleteAddressByIdReq = (id: number) => {
-  return request(`/addresses/${id}`, {
+  return request(`${orderPrefix}/addresses/${id}`, {
     method: 'delete',
   });
 };
 
 /** 查询某个地区的所有上级地区 */
 export const getParentRegionReq = (id: number) => {
-  return request(`/region/${id}/ancestor`);
+  return request(`${orderPrefix}/region/${id}/ancestor`);
 };

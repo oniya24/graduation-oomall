@@ -10,6 +10,9 @@ import {
   defaultMapStateToProps,
   defaultMapDispatchToProps,
 } from '@/utils/reduxUtil.tsx';
+import { isErrnoEqual0, isCodeEqualOk } from '@/utils/validate';
+import { Toast } from 'antd-mobile';
+import { history } from 'umi';
 const namespace = 'address';
 
 // export const mapStateToProps = ({ address }) => {
@@ -58,6 +61,10 @@ const model = {
     },
     *postAddress({ payload }, { call, put }) {
       const res = yield call(postAddressReq, payload);
+      if (isCodeEqualOk(res) || isErrnoEqual0(res)) {
+        Toast.success('创建成功', 1);
+        history.push('/address');
+      }
     },
     *putDefaultAddress({ payload }, { call, put }) {
       const res = yield call(putDefaultAddressReq, payload);

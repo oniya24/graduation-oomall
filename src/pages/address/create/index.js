@@ -5,12 +5,15 @@ import { List, Picker, Button, InputItem, TextareaItem } from 'antd-mobile';
 import { district } from 'antd-mobile-demo-data';
 import { useEffect } from 'react';
 import { validateFormError } from '@/utils/validate';
+console.log(district);
 const address_edit = ({ form, postAddress }) => {
   const { getFieldProps, validateFields } = form;
   const submit = () => {
     validateFields((error, value) => {
-      if (!validateFormError(error)) {
-        postAddress({ value });
+      if (validateFormError(error)) {
+        // console.log(value)
+        value.regionId = 130102;
+        postAddress(value);
       }
     });
   };

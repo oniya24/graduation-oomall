@@ -1,4 +1,8 @@
-import { getAllCommentsReq } from '@/services/Comment.tsx';
+import {
+  getAllCommentsReq,
+  postSkuCommentReq,
+  getSkuCommentsReq,
+} from '@/services/Comment.tsx';
 import {
   defaultMapStateToProps,
   defaultMapDispatchToProps,

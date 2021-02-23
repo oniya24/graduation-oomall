@@ -1,11 +1,12 @@
 import { request } from 'umi';
+import { orderPrefix } from '@/consts/routers';
 /**
  * aftersales: 售后模块
  */
 
 /** 获得售后单的所有状态 */
 export const getAftersaleStateReq = () => {
-  return request('/aftersales/states');
+  return request(`${orderPrefix}/aftersales/states`);
 };
 
 /** 买家提交售后单 */
@@ -16,7 +17,7 @@ export const postAftersaleReq = ({
   id: number;
   data: number;
 }) => {
-  return request(`/orderitems/${id}/aftersales`, {
+  return request(`${orderPrefix}/orderitems/${id}/aftersales`, {
     method: 'post',
     data: data,
   });
@@ -24,7 +25,7 @@ export const postAftersaleReq = ({
 
 /** 买家查询所有的售后单信息 */
 export const getAllAftersaleReq = (params: any) => {
-  return request('/aftersales', {
+  return request(`${orderPrefix}/aftersales`, {
     method: 'get',
     params: params,
   });
@@ -32,7 +33,7 @@ export const getAllAftersaleReq = (params: any) => {
 
 /** 买家根据售后单id查询售后单信息 */
 export const getAftersaleByIdReq = (id: number) => {
-  return request(`/aftersales/${id}`);
+  return request(`${orderPrefix}/aftersales/${id}`);
 };
 
 /** 买家修改售后单信息 */
@@ -43,7 +44,7 @@ export const putAftersaleByIdReq = ({
   id: number;
   data: number;
 }) => {
-  return request(`/aftersales/${id}`, {
+  return request(`${orderPrefix}/aftersales/${id}`, {
     method: 'put',
     data: data,
   });
@@ -51,7 +52,7 @@ export const putAftersaleByIdReq = ({
 
 /** 买家取消售后单和逻辑删除售后单 */
 export const deleteAftersaleByIdReq = (id: number) => {
-  return request(`/aftersales/${id}`, {
+  return request(`${orderPrefix}/aftersales/${id}`, {
     method: 'delete',
   });
 };
@@ -64,7 +65,7 @@ export const putAftersaleSendbackReq = ({
   id: number;
   data: number;
 }) => {
-  return request(`/aftersales/${id}/sendback`, {
+  return request(`${orderPrefix}/aftersales/${id}/sendback`, {
     method: 'put',
     data: data,
   });
@@ -72,5 +73,5 @@ export const putAftersaleSendbackReq = ({
 
 /** 买家确认售后单结束 */
 export const putAftersaleConfirmReq = (id: number) => {
-  return request(`/aftersales/${id}/confirm`);
+  return request(`${orderPrefix}/aftersales/${id}/confirm`);
 };

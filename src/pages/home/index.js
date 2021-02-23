@@ -1,17 +1,25 @@
 import { mapStateToProps, mapDispatchToProps } from '@/models/Home';
 import { Card, Carousel, WingBlank } from 'antd-mobile';
 import { connect } from 'umi';
+import { useEffect } from 'react';
 const home = ({
   presaleList,
   grouponList,
   advertisementList,
+  allAdvertisementList,
   flashList,
   getAllPresale,
   getAllGroupon,
   getCurrentAdvertisement,
+  getAllAdvertisement,
   getCurrentflash,
 }) => {
   console.log(grouponList);
+  useEffect(() => {
+    console.log('拉广告');
+    // getCurrentAdvertisement()
+    getAllAdvertisement();
+  }, []);
   return (
     <WingBlank size="sm">
       <Card>
@@ -41,6 +49,14 @@ const home = ({
             );
           })}
         </Carousel>
+        {allAdvertisementList.map(item => {
+          return (
+            <div>
+              {item.id}
+              <img src={item.imagePath}></img>
+            </div>
+          );
+        })}
       </Card>
     </WingBlank>
   );

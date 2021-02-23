@@ -4,5 +4,8 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  devServer: {
+    port: 7000,
+  },
   sass: {},
 });
