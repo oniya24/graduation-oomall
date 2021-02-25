@@ -1,7 +1,7 @@
 import { mapStateToProps, mapDispatchToProps } from '@/models/Address';
 import { connect, history } from 'umi';
 import { useEffect, useState } from 'react';
-import { Card, Button } from 'antd-mobile';
+import { Card, Button, Tag } from 'antd-mobile';
 import styles from './index.scss';
 import circle_plus from '@/public/circle_plus.svg';
 
@@ -22,12 +22,18 @@ const address = ({
   const redirect2Create = item => {
     history.push('/address/create');
   };
+  const handleDeleteAddress = async ({ id }) => {
+    await deleteAddressById(id);
+    await getAllAddress({
+      page: 1,
+      pageSize: 20,
+    });
+  };
   useEffect(() => {
     getAllAddress({
       page: 1,
       pageSize: 20,
     });
-    getParentRegion(100000);
     saveDetail({});
   }, []);
   return (
@@ -38,27 +44,54 @@ const address = ({
         onClick={redirect2Create}
       />
       {addressList.map(item => {
-        const { id, region_id, detail, consignee, mobile, state } = item;
+        const {
+          id,
+          regionList,
+          detail,
+          isDefault,
+          consignee,
+          mobile,
+          state,
+        } = item;
         return (
-          <div className={styles.item_contain}>
-            <div style={{ flex: '1' }}>
-              <div>
-                <span>{consignee}</span>
-                <span>{mobile}</span>
-              </div>
-              <div>
-                <span>{region_id}</span>
-                <span>{detail}</span>
+          <div style={{ borderBottom: '1px solid #ddd', marginBottom: 10 }}>
+            <div className={styles.item_contain}>
+              <div style={{ flex: '1' }}>
+                <div>
+                  <span>{consignee}</span>
+                  <span>{mobile}</span>
+                  {isDefault ? <Tag selected>默认地址</Tag> : null}
+                </div>
+                <div>
+                  <span>
+                    {regionList.reduce((prev, cur) => {
+                      return prev + cur.name + ' ';
+                    }, '')}
+                  </span>
+                  <span>{detail}</span>
+                </div>
               </div>
             </div>
-            <Button
-              inline
-              size="small"
-              type="ghost"
-              onClick={() => redirect2Edit(item)}
-            >
-              编辑地址
-            </Button>
+            <div className={styles.button_contain}>
+              <Button
+                style={{ marginRight: 10 }}
+                inline
+                size="small"
+                type="ghost"
+                onClick={() => redirect2Edit(item)}
+              >
+                编辑地址
+              </Button>
+              <Button
+                style={{ marginRight: 10 }}
+                inline
+                size="small"
+                type="warning"
+                onClick={() => handleDeleteAddress(item)}
+              >
+                删除地址
+              </Button>
+            </div>
           </div>
         );
       })}

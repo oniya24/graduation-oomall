@@ -8,13 +8,18 @@
 .item_contain {
   display: flex;
   justify-content: space-around;
-  padding: 10px 15px;
+  padding: 5px 8px;
   align-items: center;
   background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
   span {
     margin: 0 5px
   }
+}
+.button_contain {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 5px;
 }
 
 .address_add {

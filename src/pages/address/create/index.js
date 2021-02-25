@@ -5,15 +5,19 @@ import { List, Picker, Button, InputItem, TextareaItem } from 'antd-mobile';
 import { district } from 'antd-mobile-demo-data';
 import { useEffect } from 'react';
 import { validateFormError } from '@/utils/validate';
-console.log(district);
+import { regionData } from '@/consts/mall';
 const address_edit = ({ form, postAddress }) => {
   const { getFieldProps, validateFields } = form;
   const submit = () => {
     validateFields((error, value) => {
       if (validateFormError(error)) {
         // console.log(value)
-        value.regionId = 130102;
-        postAddress(value);
+        const { regionList } = value;
+
+        postAddress({
+          ...value,
+          regionId: regionList[regionList.length - 1],
+        });
       }
     });
   };
@@ -41,9 +45,9 @@ const address_edit = ({ form, postAddress }) => {
         </InputItem>
         <Picker
           extra="请选择(可选)"
-          data={district}
+          data={regionData}
           title="Areas"
-          {...getFieldProps('regionId', {
+          {...getFieldProps('regionList', {
             initialValue: '',
             rules: [{ required: true }],
           })}

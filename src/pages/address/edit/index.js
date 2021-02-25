@@ -10,7 +10,7 @@ import {
   Switch,
   Modal,
 } from 'antd-mobile';
-import { district } from 'antd-mobile-demo-data';
+import { regionData } from '@/consts/mall';
 import { useEffect } from 'react';
 import { validateFormError } from '@/utils/validate';
 const address_edit = ({
@@ -26,13 +26,24 @@ const address_edit = ({
     getFieldError,
     setFieldsValue,
   } = form;
-  const { consignee, mobile, regionId, detail, id, isDefault } = addressDetail;
+  const {
+    consignee,
+    mobile,
+    regionList,
+    detail,
+    id,
+    isDefault,
+  } = addressDetail;
   const submit = () => {
     validateFields((error, value) => {
-      if (!validateFormError(error)) {
-        const { isDefault, ...params } = value;
+      if (validateFormError(error)) {
+        const { isDefault, regionList } = value;
         isDefault && putDefaultAddress(id); // 设置为默认地址
-        putAddressById({ ...params, id });
+        putAddressById({
+          ...value,
+          id,
+          regionId: regionList[regionList.length - 1],
+        });
       }
     });
   };
@@ -61,10 +72,10 @@ const address_edit = ({
         </InputItem>
         <Picker
           extra="请选择(可选)"
-          data={district}
+          data={regionData}
           title="Areas"
-          {...getFieldProps('regionId', {
-            initialValue: regionId,
+          {...getFieldProps('regionList', {
+            initialValue: regionList.map(item => `${item.id}`),
             rules: [{ required: true, message: '需要选择省市' }],
           })}
           onOk={e => console.log('ok', e)}

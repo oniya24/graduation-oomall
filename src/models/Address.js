@@ -5,6 +5,7 @@ import {
   putAddressByIdReq,
   deleteAddressByIdReq,
   getParentRegionReq,
+  getDescendantRegionReq,
 } from '@/services/Address.tsx';
 import {
   defaultMapStateToProps,
@@ -15,41 +16,26 @@ import { Toast } from 'antd-mobile';
 import { history } from 'umi';
 const namespace = 'address';
 
-// export const mapStateToProps = ({ address }) => {
-//   const { addressList } = address;
-//   return {
-//     addressList,
-
-//   }
-// }
-// export const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getAllAddress: (payload) => dispatch({ type: `${namespace}/getAllAddress`, payload }),
-//     postAddress: (payload) => dispatch({ type: `${namespace}/postAddress`, payload }),
-//     putDefaultAddress: (payload) => dispatch({ type: `${namespace}/putDefaultAddress`, payload }),
-//     deleteAddressByIdReq: (payload) => dispatch({ type: `${namespace}/deleteAddressByIdReq`, payload }),
-//     getParentRegion: (payload) => dispatch({ type: `${namespace}/getParentRegion`, payload }),
-//     putAddressById: (payload) => dispatch({ type: `${namespace}/putAddressById`, payload }),
-//   }
-// }
-
 const model = {
   namespace: namespace,
   state: {
     addressList: [],
     addressDetail: {},
+    curParentRegion: [],
   },
   effects: {
     *getAllAddress({ payload }, { call, put }) {
       const res = yield call(getAllAddressReq, payload);
-      const { data } = res;
-      const { list } = data;
-      yield put({
-        type: 'save',
-        payload: {
-          addressList: list,
-        },
-      });
+      if (isCodeEqualOk(res) || isErrnoEqual0(res)) {
+        const { data } = res;
+        const { list } = data;
+        yield put({
+          type: 'save',
+          payload: {
+            addressList: list,
+          },
+        });
+      }
     },
     *saveDetail({ payload }, { put }) {
       yield put({
@@ -71,12 +57,27 @@ const model = {
     },
     *putAddressById({ payload }, { call, put }) {
       const res = yield call(putAddressByIdReq, payload);
+      if (isCodeEqualOk(res) || isErrnoEqual0(res)) {
+        Toast.success('修改成功', 1);
+        history.push('/address');
+      }
     },
-    *deleteAddressByIdReq({ payload }, { call, put }) {
+    *deleteAddressById({ payload }, { call, put }) {
       const res = yield call(deleteAddressByIdReq, payload);
+      if (isCodeEqualOk(res) || isErrnoEqual0(res)) {
+        Toast.success('删除成功', 1);
+        history.push('/address');
+      }
     },
     *getParentRegion({ payload }, { call, put }) {
       const res = yield call(getParentRegionReq, payload);
+      const { data } = res;
+      yield put({
+        type: 'save',
+        payload: {
+          curParentRegion: data,
+        },
+      });
     },
   },
   reducers: {

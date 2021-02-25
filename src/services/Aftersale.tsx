@@ -39,7 +39,7 @@ export const getAftersaleByIdReq = (id: number) => {
 /** 买家修改售后单信息 */
 export const putAftersaleByIdReq = ({
   id,
-  data,
+  ...data
 }: {
   id: number;
   data: number;

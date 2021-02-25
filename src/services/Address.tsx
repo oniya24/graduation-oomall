@@ -52,3 +52,8 @@ export const deleteAddressByIdReq = (id: number) => {
 export const getParentRegionReq = (id: number) => {
   return request(`${orderPrefix}/region/${id}/ancestor`);
 };
+
+/** 查询某个某个地区的子地区 */
+export const getDescendantRegionReq = (id: number) => {
+  return request(`${orderPrefix}/region/${id}/descendant`);
+};

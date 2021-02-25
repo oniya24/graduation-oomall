@@ -12,6 +12,9 @@ import {
   defaultMapStateToProps,
   defaultMapDispatchToProps,
 } from '@/utils/reduxUtil.tsx';
+import { isErrnoEqual0, isCodeEqualOk } from '@/utils/validate';
+import { Toast } from 'antd-mobile';
+import { history } from 'umi';
 const namespace = 'aftersale';
 
 // export const mapStateToProps = ({ aftersale, loading }) => {
@@ -30,6 +33,9 @@ const aftersale = {
   effects: {
     *postAftersale({ payload }, { call, put }) {
       const res = yield call(postAftersaleReq, payload);
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        Toast.success('创建成功', 1);
+      }
     },
     *getAllAftersale({ payload }, { call, put }) {
       const res = yield call(getAllAftersaleReq, payload);
@@ -52,15 +58,27 @@ const aftersale = {
     },
     *putAftersaleById({ payload }, { call, put }) {
       const res = yield call(putAftersaleByIdReq, payload);
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        Toast.success('修改成功', 1);
+      }
     },
     *deleteAftersaleById({ payload }, { call, put }) {
       const res = yield call(deleteAftersaleByIdReq, payload);
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        Toast.success('删除成功', 1);
+      }
     },
     *putAftersaleSendback({ payload }, { call, put }) {
       const res = yield call(putAftersaleSendbackReq, payload);
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        Toast.success('反馈成功', 1);
+      }
     },
     *putAftersaleConfirm({ payload }, { call, put }) {
       const res = yield call(putAftersaleConfirmReq, payload);
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        Toast.success('确认成功', 1);
+      }
     },
   },
   reducers: {
@@ -73,7 +91,8 @@ const aftersale = {
     saveRawAftersaleList(state, action) {
       return {
         ...state,
-        rawAftersaleList: [...state.rawAftersaleList, ...action.payload],
+        // rawAftersaleList: [...state.rawAftersaleList, ...action.payload],
+        rawAftersaleList: [...action.payload],
       };
     },
   },

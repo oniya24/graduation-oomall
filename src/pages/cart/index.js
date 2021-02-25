@@ -117,7 +117,6 @@ const Cart = ({
                   <Stepper
                     showNumber
                     style={{ width: '100%', minWidth: '100px' }}
-                    showNumber
                     max={10}
                     min={1}
                     size="small"

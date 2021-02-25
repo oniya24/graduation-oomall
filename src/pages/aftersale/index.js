@@ -4,7 +4,7 @@ import { Button, ListView, SwipeAction, Card, Steps } from 'antd-mobile';
 import { connect, history } from 'umi';
 import { compactMapState, compactMapDispatch } from '@/utils/reduxUtil.tsx';
 import styles from './index.scss';
-import { aftersaleTypesPlain, orderStatePlain } from '@/consts/mall';
+import { aftersaleTypesPlain, aftersaleStatePlain } from '@/consts/mall';
 const { Step } = Steps;
 // "type": 0, // 类型
 // "reason": "string", // 理由
@@ -59,23 +59,10 @@ const favorite = ({
     return (
       <Card key={rowID} style={{ padding: '10px 15px' }}>
         <Card.Header title={shopId} />
-        <Card.Body onClick={() => history.push(`/aftersale/detail?id=${id}`)}>
-          {
-            // "type": 0, // 类型
-            // "reason": "string", // 理由
-            // "refund": 0, // 退课金额
-            // "quantity": 0, // 数量
-            // "regionId": 0, // 地址
-            // "detail": "string", // 详细地址
-            // "consignee": "string", // 收件人
-            // "mobile": "string", // 手机
-            // "customerLogSn": "string", //
-            // "shopLogSn": "string",
-            // "state": 0 // 当前状态
-          }
+        <Card.Body onClick={() => history.push(`/aftersale/detail/${id}`)}>
           <div>
             <p>售后类型: {aftersaleTypesPlain[type]}</p>
-            <p>当前进度: {orderStatePlain[state]}</p>
+            <p>当前进度: {aftersaleStatePlain[state - 1]}</p>
             <p>退款金额: {refund}</p>
           </div>
         </Card.Body>
@@ -89,7 +76,7 @@ const favorite = ({
                 type="warning"
                 onClick={() => deleteOneFavorite(rowData)}
               >
-                {Number(state) === 0 ? '取消售后' : '删除记录'}
+                {Number(state) === 8 ? '取消售后' : '删除记录'}
               </Button>
               <Button
                 style={{ margin: '0 5px' }}

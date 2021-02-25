@@ -14,7 +14,7 @@ export default function BasicLayout(props) {
     history.push(link);
   };
   const handleNavBarClickBack = () => {
-    history.goBack();
+    history.push('/my');
   };
   return (
     <div className={styles.layout}>
