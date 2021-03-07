@@ -13,6 +13,13 @@ export const getAllAdvertisementReq = () => {
   return request(`${orderPrefix}/advertisement/all`);
 };
 
+/** 查询所有优惠活动 */
+export const getAllCouponActivityReq = (params: any) => {
+  return request(`${goodsPrefix}/couponactivities`, {
+    params: params,
+  });
+};
+
 /** 查询所有团购活动 */
 export const getAllGrouponReq = (params: any) => {
   return request(`${goodsPrefix}/groupons`, {

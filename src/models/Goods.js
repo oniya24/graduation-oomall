@@ -5,6 +5,7 @@ import {
   getGoodSpuByIdReq,
   getShareGoodSkuByIdReq,
   getAllBrandReq,
+  getAllSpuListReq,
 } from '@/services/Goods.tsx';
 import {
   defaultMapStateToProps,
@@ -14,6 +15,7 @@ const namespace = 'good';
 const model = {
   namespace,
   state: {
+    spuList: [],
     skuList: [],
     goodSku: {},
     goodSpu: {},
@@ -30,6 +32,17 @@ const model = {
         type: 'save',
         payload: {
           skuList: list,
+        },
+      });
+    },
+    *getAllSpuList({ payload }, { call, put }) {
+      const res = yield call(getAllSpuListReq, payload);
+      const { data } = res;
+      const { list } = data;
+      yield put({
+        type: 'save',
+        payload: {
+          spuList: list,
         },
       });
     },

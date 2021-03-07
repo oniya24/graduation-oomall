@@ -1,6 +1,7 @@
 import {
   getCurrentAdvertisementReq,
   getAllAdvertisementReq,
+  getAllCouponActivityReq,
   getAllGrouponReq,
   getAllPresaleReq,
   getCurrentflashReq,
@@ -16,6 +17,7 @@ const model = {
   namespace,
   state: {
     presaleList: [],
+    couponList: [],
     grouponList: [
       {
         id: 0,
@@ -52,18 +54,30 @@ const model = {
       yield put({
         type: 'save',
         payload: {
-          advertisementList: list,
+          advertisementList: list || [],
+        },
+      });
+    },
+    *getAllCouponActivity({ payload }, { call, put }) {
+      const res = yield call(getAllCouponActivityReq, payload);
+      const { data } = res;
+      const { list } = data;
+      yield put({
+        type: 'save',
+        payload: {
+          couponList: list,
         },
       });
     },
     *getAllAdvertisement({ payload }, { call, put }) {
       const res = yield call(getAllAdvertisementReq, payload);
-      // const { data } = res;
+      console.log('res', res);
+      const { data } = res;
       // const { list } = data;
       yield put({
         type: 'save',
         payload: {
-          allAdvertisementList: res,
+          allAdvertisementList: data || [],
         },
       });
     },

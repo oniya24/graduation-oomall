@@ -43,10 +43,11 @@ const model = {
     *getActivitiesInCoupon({ payload }, { call, put }) {
       const res = yield call(getActivitiesInCouponReq, payload);
       const { data } = res;
+      const { list } = data;
       yield put({
         type: 'save',
         payload: {
-          activityInCouponList: data,
+          activityInCouponList: list,
         },
       });
     },

@@ -45,9 +45,7 @@ const my = () => {
                 className={styles.iconButtonRow}
                 onClick={() => history.push(item.path)}
               >
-                <image
-                  style={{ width: 36, height: 36, background: item.icon }}
-                ></image>
+                <img src={item.icon} style={{ width: 32, height: 32 }}></img>
                 <span>{item.title}</span>
               </div>
             );
@@ -61,9 +59,7 @@ const my = () => {
                 className={styles.iconButtonColumn}
                 onClick={() => history.push(item.path)}
               >
-                <image
-                  style={{ width: 36, height: 36, background: item.icon }}
-                ></image>
+                <img src={item.icon} style={{ width: 32, height: 32 }}></img>
                 <span>{item.title}</span>
               </div>
             );

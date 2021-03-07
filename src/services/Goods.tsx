@@ -3,6 +3,12 @@ import { goodsPrefix } from '@/consts/routers';
 /**
  * goods: 商品模块
  */
+/* 查询一个店铺的spu */
+export const getAllSpuListReq = (params: any) => {
+  return request(`${goodsPrefix}/shops/spus`, {
+    params: params,
+  });
+};
 
 /** 查询sku */
 export const getAllSkuReq = (params: any) => {

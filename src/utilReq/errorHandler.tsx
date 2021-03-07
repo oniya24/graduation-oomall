@@ -3,6 +3,7 @@ import { history } from 'umi';
 
 export const errorHandler = (error: any) => {
   const { status } = error.response || {};
+  console.log(error);
   const RequestErrorCodeMap: any = {
     401: '接口无权限访问',
     404: '无接口资源',

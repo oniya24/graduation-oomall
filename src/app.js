@@ -1,4 +1,4 @@
-import { history, RequestConfig } from 'umi';
+import { history, RequestConfig, useLocation } from 'umi';
 import { addAuth2Header } from './utilReq/requestInterceptor';
 import { handleErrorMsg } from './utilReq/responseInterceptor';
 import { message } from 'antd';
@@ -6,6 +6,9 @@ import { errorHandler } from './utilReq/errorHandler';
 // import 'antd/dist/antd.css';
 
 export function render(oldRender) {
+  if (history.location.pathname === '/') {
+    history.push('/home');
+  }
   oldRender();
 }
 

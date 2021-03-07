@@ -39,34 +39,29 @@ export const favoAndShareData = [
   {
     title: '收藏',
     path: '/favorite',
-    icon:
-      'url(http://oomall.finetoo.top/static/favorite.svg) center center /  24px 24px no-repeat',
+    icon: 'http://oomall.finetoo.top/static/favorite.svg',
   },
   {
     title: '分享',
     path: '/share',
-    icon:
-      'url(http://oomall.finetoo.top/static/share.svg) center center /  24px 24px no-repeat',
+    icon: 'http://oomall.finetoo.top/static/share.svg',
   },
 ];
 export const orderRelatedData = [
   {
     title: '订单',
     path: '/order',
-    icon:
-      'url(http://oomall.finetoo.top/static/order.svg) center center /  24px 24px no-repeat',
+    icon: 'http://oomall.finetoo.top/static/order.svg',
   },
   {
     title: '售后',
     path: '/aftersale',
-    icon:
-      'url(http://oomall.finetoo.top/static/aftersale.svg) center center /  24px 24px no-repeat',
+    icon: 'http://oomall.finetoo.top/static/aftersale.svg',
   },
   {
     title: '评论内容',
     path: '/comment',
-    icon:
-      'url(http://oomall.finetoo.top/static/comment.svg) center center /  24px 24px no-repeat',
+    icon: 'http://oomall.finetoo.top/static/comment.svg',
   },
 ];
 
