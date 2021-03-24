@@ -17,18 +17,28 @@ const Cart = ({
   putUserCartsById,
   deleteUserCarts,
   deleteUserCartsById,
+  refreshCartList,
 }) => {
   const [loading, setLoading] = useState(true);
   const ds = new ListView.DataSource({
     rowHasChanged: () => true,
   });
   const [dataSource, setDataSource] = useState(ds);
-  const onRequestMore = () => {
-    console.log('req');
-    getUserCarts();
+  const [page, setPage] = useState(1);
+  const onRequestMore = async () => {
+    await getUserCarts({
+      page: page + 1,
+      pageSize: 100,
+    });
+    setPage(page + 1);
   };
-  const deleteOneGood = data => {
-    deleteUserCartsById();
+  const deleteOneGood = async ({ id }) => {
+    await deleteUserCartsById(id);
+    await refreshCartList();
+    await getUserCarts({
+      page: 1,
+      pageSize: 100,
+    });
   };
   const putGoodQuantity = ({ id, goodsSkuId, quantity }) => {
     putUserCartsById({ id, goodsSkuId, quantity });
@@ -36,12 +46,27 @@ const Cart = ({
   const clearAllCart = () => {
     Modal.alert('清空购物车', '确定要清空购物车吗', [
       { text: '取消' },
-      { text: '确定', onPress: () => deleteUserCarts() },
+      {
+        text: '确定',
+        onPress: async () => {
+          await deleteUserCarts();
+          await refreshCartList();
+          await getUserCarts({
+            page: 1,
+            pageSize: 100,
+          });
+        },
+      },
     ]);
   };
   useEffect(() => {
-    console.log('初始化');
-    getUserCarts();
+    getUserCarts({
+      page: 1,
+      pageSize: 100,
+    });
+    return () => {
+      refreshCartList();
+    };
   }, []);
   useEffect(() => {
     console.log('reset');

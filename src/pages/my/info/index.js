@@ -5,7 +5,7 @@ import { createForm } from 'rc-form';
 import { validateFormError } from '@/utils/validate';
 import styles from '@/pages/index.scss';
 import { useEffect, useReducer } from 'react';
-import dayjs from 'dayjs';
+import moment from 'moment';
 const my_info = ({
   userInfo,
   getUser,
@@ -23,21 +23,32 @@ const my_info = ({
   } = form;
   const handleInfoModify = () => {
     validateFields(['realName', 'gender', 'birthday'], (error, value) => {
-      console.log(value);
+      if (validateFormError(error)) {
+        const { gender, birthday, ...tail } = value;
+        putUser({
+          ...tail,
+          gender: gender[0],
+          birthday: moment(birthday).format('YYYY-MM-DD'),
+        });
+      }
     });
   };
   useEffect(() => {
-    console.log(userInfo['gender']);
+    getUser();
+  }, []);
+  useEffect(() => {
+    const { gender, birthday, ...tail } = userInfo;
     const data = {
-      ...userInfo,
-      birthday: new Date(userInfo['birthday']),
+      ...tail,
+      birthday: new Date(birthday),
+      gender: [gender],
     };
+    console.log(data);
     setFieldsValue(data);
   }, [userInfo]);
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <Card style={{ height: '100%', width: '100%', padding: 10 }}>
-        这里写获取用户信息 修改用户信息 跳转到重置密码页
         <List>
           <InputItem
             disabled
@@ -97,8 +108,8 @@ const my_info = ({
             extra=""
             cols={1}
             data={[
-              { label: '女生', value: '0' },
-              { label: '男生', value: '1' },
+              { label: '女生', value: 0 },
+              { label: '男生', value: 1 },
             ]}
             title="性别"
             {...getFieldProps('gender', {
@@ -109,24 +120,18 @@ const my_info = ({
               <span className={styles.form_item_placeholderStyle}>性别</span>
             </List.Item>
           </Picker>
-          <List.Item
-            extra={
-              <Button
-                type="ghost"
-                size="small"
-                onClick={() => history.push('reset_password')}
-              >
-                重置密码
-              </Button>
-            }
-          >
-            <span className={styles.form_item_placeholderStyle}>密码</span>
-          </List.Item>
           <Button
             className={styles.form_item_button}
             onClick={handleInfoModify}
           >
-            修改
+            提交修改
+          </Button>
+          <Button
+            type="ghost"
+            // className={styles.form_item_button}
+            onClick={() => history.push('info/reset_password')}
+          >
+            修改密码
           </Button>
         </List>
       </Card>

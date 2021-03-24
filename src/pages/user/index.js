@@ -4,8 +4,9 @@ import { connect } from 'umi';
 import { List, InputItem, Card, Button, Picker, DatePicker } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { validateFormError } from '@/utils/validate';
+import moment from 'moment';
 import styles from './index.scss';
-const login = ({ postUserLogin, postUserReq, form }) => {
+const login = ({ postUserLogin, postUser, form }) => {
   const [userState, setUserState] = useState(false);
   const {
     getFieldProps,
@@ -17,7 +18,7 @@ const login = ({ postUserLogin, postUserReq, form }) => {
   const submitLogin = () => {
     validateFields((error, value) => {
       console.log(error, value);
-      if (!validateFormError(error)) {
+      if (validateFormError(error)) {
         postUserLogin(value);
       }
     });
@@ -25,8 +26,13 @@ const login = ({ postUserLogin, postUserReq, form }) => {
   const submitRegister = () => {
     validateFields((error, value) => {
       console.log(error, value);
-      if (!validateFormError(error)) {
-        postUserReq(value);
+      if (validateFormError(error)) {
+        const { birthday, gender, ...tail } = value;
+        postUser({
+          gender: gender[0],
+          birthday: moment(birthday).format('YYYY-MM-DD'),
+          ...tail,
+        });
       }
     });
   };
@@ -139,7 +145,10 @@ const login = ({ postUserLogin, postUserReq, form }) => {
                 <span className={styles.form_item_placeholderStyle}>性别</span>
               </List.Item>
             </Picker>
-            <Button onClick={submitLogin} className={styles.form_item_submit}>
+            <Button
+              onClick={submitRegister}
+              className={styles.form_item_submit}
+            >
               注册
             </Button>
           </List>

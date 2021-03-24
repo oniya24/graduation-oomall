@@ -1,15 +1,28 @@
 import { history, RequestConfig, useLocation } from 'umi';
 import { addAuth2Header } from './utilReq/requestInterceptor';
 import { handleErrorMsg } from './utilReq/responseInterceptor';
-import { message } from 'antd';
+import { Toast } from 'antd-mobile';
 import { errorHandler } from './utilReq/errorHandler';
+import { getUserReq } from './services/User';
 // import 'antd/dist/antd.css';
 
 export function render(oldRender) {
   if (history.location.pathname === '/') {
-    history.push('/home');
+    history.push('/user');
   }
-  oldRender();
+  try {
+    getUserReq()
+      .then(() => {
+        oldRender();
+      })
+      .catch(e => {
+        Toast.fail('请先登录');
+        history.push('user');
+      });
+  } catch (e) {
+    Toast.fail('请先登录');
+    history.push('user');
+  }
 }
 
 export const request = {

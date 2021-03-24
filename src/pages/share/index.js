@@ -4,11 +4,9 @@ import { useEffect } from 'react';
 import { Card, Tabs, Badge, ListView } from 'antd-mobile';
 import ShareTab from './components/shareTab';
 import BesharedTab from './components/besharedTab';
-import ActivityTab from './components/activityTab';
 const tabs = [
   { title: <Badge>分享的商品</Badge> },
   { title: <Badge>收到的分享</Badge> },
-  { title: <Badge>分享的活动</Badge> },
 ];
 const share = () => {
   return (
@@ -45,17 +43,6 @@ const share = () => {
           }}
         >
           <BesharedTab />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 'auto',
-            backgroundColor: '#fff',
-          }}
-        >
-          <ActivityTab />
         </div>
       </Tabs>
     </Card>

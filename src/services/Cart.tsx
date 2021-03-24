@@ -1,5 +1,6 @@
 import { request } from 'umi';
 import { pagination } from '@/interfaces/common';
+import { orderPrefix } from '@/consts/routers';
 /**
  * cart: 购物车模块
  */
@@ -10,7 +11,7 @@ interface skuInfo {
 
 /** 买家获得购物车列表 */
 export const getUserCartsReq = (params: pagination) => {
-  return request('/carts', {
+  return request(`${orderPrefix}/carts`, {
     method: 'get',
     params: params,
   });
@@ -18,7 +19,7 @@ export const getUserCartsReq = (params: pagination) => {
 
 /** 买家将商品加入购物车 */
 export const postUserCartsReq = (data: skuInfo) => {
-  return request('/carts', {
+  return request(`${orderPrefix}/carts`, {
     method: 'post',
     data: data,
   });
@@ -26,7 +27,7 @@ export const postUserCartsReq = (data: skuInfo) => {
 
 /** 买家清空购物车 */
 export const deleteUserCartsReq = () => {
-  return request('/carts', {
+  return request(`${orderPrefix}/carts`, {
     method: 'delete',
   });
 };
@@ -39,7 +40,7 @@ export const putUserCartsByIdReq = ({
   id: number;
   data: skuInfo;
 }) => {
-  return request(`/carts/${id}`, {
+  return request(`${orderPrefix}/carts/${id}`, {
     method: 'put',
     data: data,
   });
@@ -47,7 +48,7 @@ export const putUserCartsByIdReq = ({
 
 /** 买家删除购物车中商品 */
 export const deleteUserCartsByIdReq = (id: number) => {
-  return request(`/carts/${id}`, {
+  return request(`${orderPrefix}/carts/${id}`, {
     method: 'delete',
   });
 };

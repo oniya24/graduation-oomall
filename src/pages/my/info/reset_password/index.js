@@ -2,8 +2,10 @@ import { mapStateToProps, mapDispatchToProps } from '@/models/User';
 import { connect } from 'umi';
 import { List, InputItem, Card, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
+import { validateFormError } from '@/utils/validate';
 import styles from '@/pages/index.scss';
 const my_info_reset_password = ({
+  userInfo,
   putUserPassword,
   getUserPasswordAuthCode,
   form,
@@ -17,11 +19,17 @@ const my_info_reset_password = ({
   } = form;
   const handleInfoModify = () => {
     validateFields((error, value) => {
-      console.log(value);
+      if (validateFormError(error)) {
+        putUserPassword(value);
+      }
     });
   };
   const handleReqAuth = () => {
-    getUserPasswordAuthCode();
+    const { userName, email } = userInfo;
+    getUserPasswordAuthCode({
+      userName,
+      email,
+    });
   };
   return (
     <Card className={styles.page_contain}>
@@ -43,12 +51,12 @@ const my_info_reset_password = ({
         </div>
         <InputItem
           className={styles.form_item}
-          {...getFieldProps('userName', {
+          {...getFieldProps('newPassword', {
             rules: [{ required: true, message: '请输入新密码' }],
           })}
           placeholder={'新密码'}
         >
-          <span className={styles.form_item_placeholderStyle}>用户名</span>
+          <span className={styles.form_item_placeholderStyle}>新密码</span>
         </InputItem>
         <Button className={styles.form_item_button} onClick={handleInfoModify}>
           修改

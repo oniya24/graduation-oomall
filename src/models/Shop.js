@@ -6,6 +6,7 @@ import {
 } from '@/services/Coupon.tsx';
 import { getAllSpuListReq, getGoodSpuByIdReq } from '@/services/Goods.tsx';
 import { postGoods2FavoriteReq } from '@/services/Favorite.tsx';
+import { postUserCartsReq } from '@/services/Cart.tsx';
 import {
   defaultMapStateToProps,
   defaultMapDispatchToProps,
@@ -70,6 +71,12 @@ const model = {
       const res = yield call(postGoods2FavoriteReq, payload);
       if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
         Toast.success('收藏成功', 1);
+      }
+    },
+    *postUserCarts({ payload }, { call, put }) {
+      const res = yield call(postUserCartsReq, payload);
+      if (isCodeEqualOk(res) || isCodeEqualOk(res)) {
+        Toast.success('加入购物车成功', 1);
       }
     },
     *refreshSpuList({ payload }, { call, put }) {

@@ -4,33 +4,48 @@ import { ListView, SwipeAction } from 'antd-mobile';
 import { connect, history } from 'umi';
 import styles from './index.scss';
 const favorite = ({
-  rawFavoriteList,
+  favoriteList,
   getUserFavoriteLoading,
   getUserFavorite,
   deleteGoodsById,
-  ...params
+  refreshFavoriteList,
 }) => {
-  console.log(getUserFavoriteLoading, params);
   const ds = new ListView.DataSource({
     rowHasChanged: () => true,
   });
   const [dataSource, setDataSource] = useState(ds);
+  const [page, setPage] = useState(1);
   const onRequestMore = () => {
-    getUserFavorite();
+    getUserFavorite({
+      page: page + 1,
+      pageSize: 100,
+    });
+    setPage(page + 1);
   };
-  const deleteOneFavorite = ({ id }) => {
-    deleteGoodsById(id);
+  const deleteOneFavorite = async ({ id }) => {
+    await deleteGoodsById(id);
+    await refreshFavoriteList();
+    await getUserFavorite({
+      page: 1,
+      pageSize: 100,
+    });
   };
   useEffect(() => {
-    getUserFavorite();
+    getUserFavorite({
+      page: 1,
+      pageSize: 100,
+    });
+    return () => {
+      refreshCartList();
+    };
   }, []);
   useEffect(() => {
-    console.log('reset');
-    setDataSource(dataSource.cloneWithRows([...rawFavoriteList]));
-  }, [rawFavoriteList]);
+    setDataSource(dataSource.cloneWithRows([...favoriteList]));
+  }, [favoriteList]);
   function renderItem(rowData, sectionID, rowID) {
     const { goodSku } = rowData;
-    const { name, skuSn, imageUrl, inventory, originalPrice, price } = goodSku;
+    const { name, skuSn, imageUrl, inventory, originalPrice, price } =
+      goodSku || {};
     return (
       <SwipeAction
         style={{ backgroundColor: 'gray' }}
@@ -38,7 +53,7 @@ const favorite = ({
         right={[
           {
             text: '删除',
-            onPress: () => deleteOneGood(rowData),
+            onPress: () => deleteOneFavorite(rowData),
             style: {
               backgroundColor: '#F4333C',
               color: 'white',

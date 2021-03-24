@@ -3,40 +3,42 @@ import {
   postGoods2FavoriteReq,
   deleteGoodsByIdReq,
 } from '@/services/Favorite.tsx';
+import {
+  defaultMapStateToProps,
+  defaultMapDispatchToProps,
+} from '@/utils/reduxUtil.tsx';
+import { isErrnoEqual0, isCodeEqualOk } from '@/utils/validate';
+import { Toast } from 'antd-mobile';
 const namespace = 'favorite';
-export const mapStateToProps = ({ favorite, loading }) => {
-  const { rawFavoriteList } = favorite;
-  console.log(loading);
-  return {
-    rawFavoriteList,
-    getUserFavoriteLoading: loading.effects[`${namespace}/getUserFavorite`],
-  };
-};
-export const mapDispatchToProps = dispatch => {
-  return {
-    getUserFavorite: payload =>
-      dispatch({ type: `${namespace}/getUserFavorite`, payload }),
-    deleteGoodsById: payload =>
-      dispatch({ type: `${namespace}/deleteGoodsById`, payload }),
-  };
-};
-
-export default {
+const model = {
   namespace: namespace,
   state: {
     rawFavoriteList: [],
+    favoriteList: [],
   },
   effects: {
     *getUserFavorite({ payload }, { call, put }) {
       const res = yield call(getUserFavoriteReq, payload);
       const { data } = res;
+      const { list } = data;
       yield put({
         type: 'saveFavoriteList',
-        payload: data,
+        payload: list,
       });
     },
     *deleteGoodsById({ payload }, { call, put }) {
       const res = yield call(deleteGoodsByIdReq, payload);
+      if (isCodeEqualOk(res) || isErrnoEqual0(res)) {
+        Toast.success('删除成功');
+      }
+    },
+    *refreshFavoriteList({ payload }, { call, put }) {
+      yield put({
+        type: 'save',
+        payload: {
+          favoriteList: [],
+        },
+      });
     },
   },
   reducers: {
@@ -49,8 +51,12 @@ export default {
     saveFavoriteList(state, action) {
       return {
         ...state,
-        rawFavoriteList: [...action.payload, ...state.rawFavoriteList],
+        favoriteList: [...action.payload, ...state.favoriteList],
       };
     },
   },
 };
+
+export const mapStateToProps = defaultMapStateToProps(model);
+export const mapDispatchToProps = defaultMapDispatchToProps(model);
+export default model;
