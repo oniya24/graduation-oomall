@@ -12,20 +12,38 @@ if (isIPhone) {
   };
 }
 const payment = ({
+  //获取订单信息
+  getOrderById,
+  orderDetail,
   paypatterns,
   getPayPatterns,
   postPayRecord,
   postAftersalePayRecordById,
 }) => {
   const { query } = useLocation(); // 根据模式判断是售后 还是 正常订单
-  const { mode } = query; // 根据模式判断是售后 还是 正常订单
+  const { orderId, mode } = query; // 根据模式判断是售后 还是 正常订单
   const [curPayPattern, setCurPayPattern] = useState(0);
+  const { price } = orderDetail;
+  useEffect(() => {
+    getOrderById(orderId);
+  }, []);
   const hanldePaymentSubmit = async () => {
-    postPayRecord();
-    postAftersalePayRecordById();
+    if (mode) {
+      await postPayRecord({
+        id: orderId,
+        price: price,
+        paymentPattern: '002',
+      });
+    } else {
+      await postAftersalePayRecordById({
+        id: 1,
+        price: price,
+        paymentPattern: '002',
+      });
+    }
   };
   const handlePaymentActionSheet = () => {
-    const BUTTONS = ['支付', '取消', 'Delete'];
+    const BUTTONS = ['支付', '取消'];
     ActionSheet.showActionSheetWithOptions(
       {
         options: BUTTONS,

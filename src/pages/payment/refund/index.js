@@ -9,7 +9,7 @@ const payment_refund = ({
   getAftersaleRefundById,
 }) => {
   const { query } = useLocation();
-  const { id, mode } = query; // id是订单号, mode是售后还是正常, 好像字段没有区别
+  const { orderId, mode } = query; // id是订单号, mode是售后还是正常, 好像字段没有区别
   useEffect(() => {
     if (mode) {
       getRefundById(id);

@@ -6,7 +6,6 @@ import SingleLayout from './SingleLayout';
 
 const layout = props => {
   const { pathname } = useLocation();
-  console.log(pathname);
   let isBasic = routers.some(item => item.path === pathname);
   const Container = isBasic ? BasicLayout : SingleLayout;
 

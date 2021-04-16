@@ -9,18 +9,22 @@ const payment_record = ({
   getAftersalePayRecordById,
 }) => {
   const { query } = useLocation();
-  const { id, mode } = query; // id是订单号, mode是售后还是正常, 好像字段没有区别
+  const { orderId, mode } = query; // id是订单号, mode是售后还是正常, 好像字段没有区别
   useEffect(() => {
     if (mode) {
-      getPayRecordById(id);
+      getPayRecordById(orderId);
     } else {
-      getAftersalePayRecordById(id);
+      getAftersalePayRecordById(orderId);
     }
   }, []);
   return (
     <Card>
       131313 这是支付的内容
-      {mode ? <Card>{payRecord}</Card> : <Card>{aftersaleRecord}</Card>}
+      {mode ? (
+        <Card>{JSON.stringify(payRecord)}</Card>
+      ) : (
+        <Card>{JSON.stringify(aftersaleRecord)}</Card>
+      )}
     </Card>
   );
 };

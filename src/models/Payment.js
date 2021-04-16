@@ -6,11 +6,14 @@ import {
   postAftersalePayRecordByIdReq,
   getAftersalePayRecordByIdReq,
   getAftersaleRefundByIdReq,
+  getOrderByIdReq,
 } from '@/services/Payment.tsx';
 import {
   defaultMapStateToProps,
   defaultMapDispatchToProps,
 } from '@/utils/reduxUtil.tsx';
+import { isErrnoEqual0, isCodeEqualOk } from '@/utils/validate';
+import { Toast } from 'antd-mobile';
 const namespace = 'payment';
 const model = {
   namespace,
@@ -20,6 +23,7 @@ const model = {
     payRefund: {},
     aftersaleRecord: {},
     aftersaleRefund: {},
+    orderDetail: {},
   },
   effects: {
     *getPayPatterns({ payload }, { call, put }) {
@@ -34,13 +38,9 @@ const model = {
     },
     *postPayRecord({ payload }, { call, put }) {
       const res = yield call(postPayRecordReq, payload);
-      const { data } = res;
-      yield put({
-        type: 'save',
-        payload: {
-          payRecord: data,
-        },
-      });
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        Toast.success('支付成功');
+      }
     },
     *getPayRecordById({ payload }, { call, put }) {
       const res = yield call(getPayRecordByIdReq, payload);
@@ -64,6 +64,9 @@ const model = {
     },
     *postAftersalePayRecordById({ payload }, { call, put }) {
       const res = yield call(postAftersalePayRecordByIdReq, payload);
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        Toast.success('支付成功');
+      }
     },
     *getAftersalePayRecordById({ payload }, { call, put }) {
       const res = yield call(getAftersalePayRecordByIdReq, payload);
@@ -82,6 +85,16 @@ const model = {
         type: 'save',
         payload: {
           aftersaleRefund: data,
+        },
+      });
+    },
+    *getOrderById({ payload }, { call, put }) {
+      const res = yield call(getOrderByIdReq, payload);
+      const { data } = res;
+      yield put({
+        type: 'save',
+        payload: {
+          orderDetail: data,
         },
       });
     },

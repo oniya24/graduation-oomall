@@ -1,8 +1,9 @@
 import { request } from 'umi';
+import { paymentPrefix } from '@/consts/routers';
 
 // 获得支付渠道，目前只返回002 模拟支付渠道，001返点支付
 export const getPayPatternsReq = () => {
-  return request('/payments/patterns');
+  return request(`${paymentPrefix}/payments/patterns`);
 };
 
 interface paymentData {
@@ -20,7 +21,7 @@ export const postPayRecordReq = ({
   id: number;
   data: paymentData;
 }) => {
-  return request(`/orders/${id}/payments`, {
+  return request(`${paymentPrefix}/orders/${id}/payments`, {
     method: 'post',
     data: data,
   });
@@ -28,12 +29,7 @@ export const postPayRecordReq = ({
 
 // 买家查询自己的支付信息
 export const getPayRecordByIdReq = (id: number) => {
-  return request(`/orders/${id}/payments`);
-};
-
-// 买家查询自己的退款信息
-export const getRefundByIdReq = (id: number) => {
-  return request(`/orders/${id}/refunds`);
+  return request(`${paymentPrefix}/orders/${id}/payments`);
 };
 
 // 买家为售后单创建支付单 *售后
@@ -44,7 +40,7 @@ export const postAftersalePayRecordByIdReq = ({
   id: number;
   data: paymentData;
 }) => {
-  return request(`/aftersales/${id}/payments`, {
+  return request(`${paymentPrefix}/aftersales/${id}/payments`, {
     method: 'post',
     data: data,
   });
@@ -52,10 +48,20 @@ export const postAftersalePayRecordByIdReq = ({
 
 // 买家查询自己的支付信息 *售后
 export const getAftersalePayRecordByIdReq = (id: number) => {
-  return request(`/aftersales/${id}/payments`);
+  return request(`${paymentPrefix}/aftersales/${id}/payments`);
 };
 
 // 买家查询自己的支付信息 *售后
 export const getAftersaleRefundByIdReq = (id: number) => {
-  return request(`/orders/${id}/refunds`);
+  return request(`${paymentPrefix}/aftersales/${id}/refunds`);
+};
+
+// 买家查询自己的退款信息
+export const getRefundByIdReq = (id: number) => {
+  return request(`${paymentPrefix}/orders/${id}/refunds`);
+};
+
+/** 买家查询订单完整信息 */
+export const getOrderByIdReq = (id: number) => {
+  return request(`/orders/${id}`);
 };

@@ -6,6 +6,7 @@ import { createForm } from 'rc-form';
 import { validateFormError } from '@/utils/validate';
 import moment from 'moment';
 import styles from './index.scss';
+
 const login = ({ postUserLogin, postUser, form }) => {
   const [userState, setUserState] = useState(false);
   const {
@@ -40,7 +41,7 @@ const login = ({ postUserLogin, postUser, form }) => {
     <div className={styles.login_contain}>
       <Card style={{ height: '100%', width: '100%', padding: 10 }}>
         {!userState && (
-          <List>
+          <List style={{ background: 'none' }}>
             <InputItem
               title={<span>13513</span>}
               className={styles.form_item}
