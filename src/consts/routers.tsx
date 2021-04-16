@@ -75,13 +75,13 @@ export default [
 
 export const goodsPrefix: String =
   process.env.NODE_ENV == 'production'
-    ? 'http://localhost:8081'
-    : 'http://localhost:8081';
+    ? 'http://localhost:8081/goods'
+    : 'http://localhost:8081/goods';
 export const orderPrefix: String =
   process.env.NODE_ENV == 'production'
-    ? 'http://localhost:8082'
-    : 'http://localhost:8082';
+    ? 'http://localhost:8082/order'
+    : 'http://localhost:8082/order';
 export const paymentPrefix: String =
   process.env.NODE_ENV == 'production'
-    ? 'http://localhost:8083'
-    : 'http://localhost:8083';
+    ? 'http://localhost:8083/payment'
+    : 'http://localhost:8083/payment';
