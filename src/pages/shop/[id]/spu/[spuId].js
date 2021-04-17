@@ -1,6 +1,6 @@
 import { mapStateToProps, mapDispatchToProps } from '@/models/Shop';
 import { List, Drawer, Button, Card, Stepper, Toast } from 'antd-mobile';
-import { connect, useParams } from 'umi';
+import { connect, history, useParams } from 'umi';
 import { useEffect, useState } from 'react';
 import styles from './index.scss';
 const spu = ({
@@ -34,6 +34,12 @@ const spu = ({
       quantity: curQuantity
     })
   }
+  const handleCreateOrder = async () => {
+    if(curSkuId === null){
+      return Toast.fail("请选择商品规格")
+    }
+    history.push(`/order_create?skuId=${curSkuId}&quantity=${curQuantity}`)
+  }
   useEffect(() => {
     getGoodSpuById(spuId)
   }, [])
@@ -55,7 +61,7 @@ const spu = ({
                 const { inventory } = item
                 return(
                   <Button
-                    type={ item.id === curSkuId ? "primary" : "default"} 
+                    type={ item.id === curSkuId ? "ghost" : "default"} 
                     onClick={() => setCurSkuId(item.id)} style={{ height: 40 }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 40 }}>
                       <img src={item.imageUrl} style={{ width: 30, height: 30 }}></img>
@@ -76,7 +82,7 @@ const spu = ({
           className={styles.operator_contain_item}>收藏</Button>
         <Button size="small" type="primary" onClick={handleAdd2Cart}
           className={styles.operator_contain_item}>加入购物车</Button>
-        <Button size="small" type="warning" 
+        <Button size="small" type="warning" onClick={handleCreateOrder}
           className={styles.operator_contain_item}>立即购买</Button>
       </div>
     </div>

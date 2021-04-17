@@ -24,10 +24,10 @@ export default function BasicLayout(props) {
         mode="light"
         icon={<Icon type="left" />}
         onLeftClick={handleNavBarClickBack}
-        rightContent={[
-          <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
-          <Icon key="1" type="ellipsis" />,
-        ]}
+        // rightContent={[
+        //   <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
+        //   <Icon key="1" type="ellipsis" />,
+        // ]}
       >
         {title}
       </NavBar>

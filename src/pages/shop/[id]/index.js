@@ -86,6 +86,7 @@ const shop = ({
                     src={item.imageUrl}
                     alt=""
                     style={{
+                      height: 180,
                       width: '100%',
                       verticalAlign: 'top',
                       objectFit: 'cover',
@@ -111,7 +112,9 @@ const shop = ({
           onRequestMore();
         }}
         onEndReachedThreshold={2}
-        renderFooter={() => <div>已经没有数据啦</div>}
+        renderFooter={() => 
+          <div style={{ display: 'flex', justifyContent: 'center' }}>已经没有别的商品啦</div>
+        }
         style={{
           height: '100%',
           width: '100%',

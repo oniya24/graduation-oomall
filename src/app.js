@@ -7,6 +7,7 @@ import { getUserReq } from './services/User';
 // import 'antd/dist/antd.css';
 
 export function render(oldRender) {
+  return oldRender();
   if (history.location.pathname === '/') {
     history.push('/user');
   }

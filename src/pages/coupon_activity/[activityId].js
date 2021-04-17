@@ -9,7 +9,6 @@ const shop_couponActivity = ({
   getSkuInCoupon
 }) => {
   const { activityId } = useParams();
-  console.log(couponSpuList)
   useEffect(() => {
     getSkuInCoupon({
       id: activityId,

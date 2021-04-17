@@ -36,7 +36,7 @@ const favorite = ({
       pageSize: 100,
     });
     return () => {
-      refreshCartList();
+      refreshFavoriteList();
     };
   }, []);
   useEffect(() => {

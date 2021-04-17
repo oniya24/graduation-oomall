@@ -1,5 +1,5 @@
 import { mapStateToProps, mapDispatchToProps } from '@/models/Home';
-import { Card, Carousel, WingBlank, SearchBar } from 'antd-mobile';
+import { Card, Carousel, WingBlank, SearchBar, Toast } from 'antd-mobile';
 import { connect, history } from 'umi';
 import { useEffect } from 'react';
 const home = ({
@@ -16,11 +16,13 @@ const home = ({
   getCurrentflash,
   getAllCouponActivity,
 }) => {
-  console.log(allAdvertisementList);
+  const handleSearchBarSubmit = () => {
+    Toast.info('暂不支持此功能');
+  };
   useEffect(() => {
     console.log('拉广告');
     // getCurrentAdvertisement()
-    // getAllAdvertisement();
+    getAllAdvertisement();
     // getAllGroupon({
     //   shopId: 0,
     //   timeline: 0
@@ -34,9 +36,9 @@ const home = ({
   }, []);
   return (
     <WingBlank size="sm">
-      <SearchBar placeholder="Search" maxLength={8} />
+      {/* <SearchBar placeholder="Search" maxLength={8} onSubmit={handleSearchBarSubmit} /> */}
       <Card>
-        <Card.Header title="团购活动"></Card.Header>
+        <Card.Header title="广告"></Card.Header>
         <Card.Body>
           <Carousel
             style={{ marginTop: 5 }}
@@ -48,30 +50,15 @@ const home = ({
             // }
             // afterChange={index => console.log('slide to', index)}
           >
-            {grouponList.map(item => {
+            {allAdvertisementList.map(item => {
               return (
-                <div style={{ background: `url(${item.url})`, height: 180 }}>
-                  <img
-                    src={item.url}
-                    alt=""
-                    style={{
-                      width: '100%',
-                      verticalAlign: 'top',
-                      objectFit: 'cover',
-                    }}
-                  />
+                <div>
+                  {item.id}
+                  <img src={item.imagePath}></img>
                 </div>
               );
             })}
           </Carousel>
-          {allAdvertisementList.map(item => {
-            return (
-              <div>
-                {item.id}
-                <img src={item.imagePath}></img>
-              </div>
-            );
-          })}
         </Card.Body>
       </Card>
       <Card>
@@ -87,14 +74,13 @@ const home = ({
               return (
                 <div
                   style={{ background: `url(${item.imageUrl})`, height: 180 }}
-                  onClick={() =>
-                    history.push(`/shop/coupon_activity/${item.id}`)
-                  }
+                  onClick={() => history.push(`/coupon_activity/${item.id}`)}
                 >
                   <img
                     src={item.imageUrl}
                     alt=""
                     style={{
+                      height: 180,
                       width: '100%',
                       verticalAlign: 'top',
                       objectFit: 'cover',

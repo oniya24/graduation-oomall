@@ -4,6 +4,7 @@ import {
   getSkuInCouponReq,
   getActivitiesInCouponReq,
 } from '@/services/Coupon.tsx';
+import { getAllShopsReq } from '@/services/Shop.tsx';
 import { getAllSpuListReq, getGoodSpuByIdReq } from '@/services/Goods.tsx';
 import { postGoods2FavoriteReq } from '@/services/Favorite.tsx';
 import { postUserCartsReq } from '@/services/Cart.tsx';
@@ -18,6 +19,8 @@ const namespace = 'shop';
 const model = {
   namespace,
   state: {
+    shopList: [],
+
     couponActivityList: [],
     couponSpuList: [],
     spuList: [],
@@ -78,6 +81,17 @@ const model = {
       if (isCodeEqualOk(res) || isCodeEqualOk(res)) {
         Toast.success('加入购物车成功', 1);
       }
+    },
+    *getAllShops({ payload }, { call, put }) {
+      const res = yield call(getAllShopsReq, payload);
+      const { data } = res;
+      const { list } = data;
+      yield put({
+        type: 'save',
+        payload: {
+          shopList: list,
+        },
+      });
     },
     *refreshSpuList({ payload }, { call, put }) {
       yield put({
