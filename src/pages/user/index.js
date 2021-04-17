@@ -59,7 +59,9 @@ const login = ({ postUserLogin, postUser, form }) => {
               })}
               placeholder={'密码'}
             >
-              <span className={styles.form_item_placeholderStyle}>密码</span>
+              <span className={styles.form_item_placeholderStyle}>
+                密码safassafasfsa
+              </span>
             </InputItem>
             <Button onClick={submitLogin} className={styles.form_item_submit}>
               登录
