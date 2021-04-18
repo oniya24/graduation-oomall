@@ -53,6 +53,7 @@ const login = ({ postUserLogin, postUser, form }) => {
               <span className={styles.form_item_placeholderStyle}>用户名</span>
             </InputItem>
             <InputItem
+              type="password"
               className={styles.form_item}
               {...getFieldProps('password', {
                 rules: [{ required: true, message: '请输入密码' }],
@@ -78,6 +79,7 @@ const login = ({ postUserLogin, postUser, form }) => {
               <span className={styles.form_item_placeholderStyle}>用户名</span>
             </InputItem>
             <InputItem
+              type="password"
               className={styles.form_item}
               {...getFieldProps('password', {
                 rules: [{ required: true, message: '请输入密码' }],

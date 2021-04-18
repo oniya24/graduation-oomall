@@ -3,7 +3,6 @@ import { history } from 'umi';
 
 export const errorHandler = (error: any) => {
   const { status } = error.response || {};
-  console.log('error', error);
   const RequestErrorCodeMap: any = {
     401: '接口无权限访问',
     404: '无接口资源',
@@ -13,7 +12,6 @@ export const errorHandler = (error: any) => {
     500: '服务器错误',
   };
   Toast.fail(status ? RequestErrorCodeMap[status] : '请求出现异常');
-  // history.push('/404');
   return {
     errmsg: '请求失败',
     errno: -1,
