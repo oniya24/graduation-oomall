@@ -86,7 +86,7 @@ export default [
 
 export const goodsPrefix: String =
   process.env.NODE_ENV == 'production'
-    ? 'http://localhost:8081/goods'
+    ? 'http://47.96.155.159:8081'
     : 'http://localhost:8081/';
 export const orderPrefix: String =
   process.env.NODE_ENV == 'production'
