@@ -90,8 +90,8 @@ export const goodsPrefix: String =
     : 'http://47.96.155.159:8081';
 export const orderPrefix: String =
   process.env.NODE_ENV == 'production'
-    ? 'http://47.114.166.8:8082'
-    : 'http://47.114.166.8:8082';
+    ? 'http://47.96.155.159:8082'
+    : 'http://47.96.155.159:8082';
 export const paymentPrefix: String =
   process.env.NODE_ENV == 'production'
     ? 'http://localhost:8083/payment'
