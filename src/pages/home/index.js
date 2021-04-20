@@ -56,6 +56,7 @@ const home = ({
                 <div>
                   {/* <p style={{ margin: 'auto'}}>{item.content}</p> */}
                   <img
+                    crossOrigin="anonymous"
                     src={item.imagePath}
                     style={{
                       width: '100%',
