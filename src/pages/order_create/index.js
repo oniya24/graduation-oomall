@@ -21,7 +21,7 @@ const order_create = ({ postOrder, getSkuById }) => {
       <Card>
         <Card.Header title="选择收货地址"></Card.Header>
       </Card>
-      <Button onClick={postOrder}>创建订单</Button>
+      <Button onClick={handleCreateOrder}>创建订单</Button>
     </div>
   );
 };

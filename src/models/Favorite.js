@@ -23,7 +23,7 @@ const model = {
       const { list } = data;
       yield put({
         type: 'saveFavoriteList',
-        payload: list,
+        payload: list || [],
       });
     },
     *deleteGoodsById({ payload }, { call, put }) {
