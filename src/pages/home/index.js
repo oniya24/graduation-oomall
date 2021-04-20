@@ -16,6 +16,7 @@ const home = ({
   getCurrentflash,
   getAllCouponActivity,
 }) => {
+  console.log('adver', allAdvertisementList);
   const handleSearchBarSubmit = () => {
     Toast.info('暂不支持此功能');
   };
@@ -38,7 +39,7 @@ const home = ({
     <WingBlank size="sm">
       {/* <SearchBar placeholder="Search" maxLength={8} onSubmit={handleSearchBarSubmit} /> */}
       <Card>
-        <Card.Header title="广告"></Card.Header>
+        <Card.Header title="广告内容"></Card.Header>
         <Card.Body>
           <Carousel
             style={{ marginTop: 5 }}
@@ -53,8 +54,14 @@ const home = ({
             {allAdvertisementList.map(item => {
               return (
                 <div>
-                  {item.id}
-                  <img src={item.imagePath}></img>
+                  {/* <p style={{ margin: 'auto'}}>{item.content}</p> */}
+                  <img
+                    src={item.imagePath}
+                    style={{
+                      width: '100%',
+                      height: '30vh',
+                    }}
+                  ></img>
                 </div>
               );
             })}

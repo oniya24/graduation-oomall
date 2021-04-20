@@ -65,7 +65,7 @@ const model = {
       yield put({
         type: 'save',
         payload: {
-          couponList: list,
+          couponList: list || [],
         },
       });
     },
@@ -88,7 +88,7 @@ const model = {
       yield put({
         type: 'save',
         payload: {
-          grouponList: list,
+          grouponList: list || [],
         },
       });
     },
