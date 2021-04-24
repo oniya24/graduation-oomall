@@ -1,7 +1,7 @@
 import { mapStateToProps, mapDispatchToProps } from '@/models/Payment';
 import { connect, useLocation } from 'umi';
 import { useEffect, useState } from 'react';
-import { Card, Button, ActionSheet } from 'antd-mobile';
+import { Card, Button, ActionSheet, List } from 'antd-mobile';
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(
   window.navigator.userAgent,
 );
@@ -19,11 +19,12 @@ const payment = ({
   getPayPatterns,
   postPayRecord,
   postAftersalePayRecordById,
+  getPayRecordById,
 }) => {
   const { query } = useLocation(); // 根据模式判断是售后 还是 正常订单
   const { orderId, mode } = query; // 根据模式判断是售后 还是 正常订单
   const [curPayPattern, setCurPayPattern] = useState(0);
-  const { price } = orderDetail;
+  const { discountPrice, freightPrice } = orderDetail;
   useEffect(() => {
     getOrderById(orderId);
   }, []);
@@ -31,13 +32,13 @@ const payment = ({
     if (mode) {
       await postPayRecord({
         id: orderId,
-        price: price,
+        price: Number(discountPrice) + Number(freightPrice),
         paymentPattern: '002',
       });
     } else {
       await postAftersalePayRecordById({
         id: 1,
-        price: price,
+        price: Number(discountPrice) + Number(freightPrice),
         paymentPattern: '002',
       });
     }
@@ -67,11 +68,42 @@ const payment = ({
   }, []);
   return (
     <Card>
-      131313 这是支付的内容
-      <Card>
-        这里是弹窗，显示支付模式，和支付金额信息等
-        <Button onClick={handlePaymentActionSheet}>支付</Button>
-      </Card>
+      {/* {
+      "id": 0,
+      "orderId": 0,
+      "aftersaleId": 0,
+      "amount": 0,
+      "actualAmount": 0,
+      "payTime": "string",
+      "paymentPattern": "string",
+      "state": 0,
+      "beginTime": "string",
+      "endTime": "string",
+      "gmtCreate": "string",
+      "gmtModified": "string"
+    } */}
+      <List>
+        <List.Item extra={orderDetail.orderSn}>订单编号</List.Item>
+        <List.Item extra={orderDetail.originPrice}>原价</List.Item>
+        <List.Item extra={orderDetail.freightPrice}>运费</List.Item>
+        <List.Item extra={orderDetail.discountPrice}>折扣价</List.Item>
+        <List.Item extra={orderDetail.address}>地址</List.Item>
+        <List.Item extra={orderDetail.mobile}>电话</List.Item>
+        <List.Item extra={orderDetail.consignee}>收件人</List.Item>
+        {orderDetail.orderItems ||
+          [].map(item => {
+            return (
+              <>
+                <List.Item extra={item.name}>商品名</List.Item>
+                <List.Item extra={item.quantity}>商品数量</List.Item>
+                <List.Item extra={item.price}>商品价格</List.Item>
+              </>
+            );
+          })}
+      </List>
+      <Button type="primary" onClick={handlePaymentActionSheet}>
+        支付
+      </Button>
     </Card>
   );
 };

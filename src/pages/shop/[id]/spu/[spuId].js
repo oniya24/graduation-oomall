@@ -7,7 +7,8 @@ const spu = ({
   spuDetail,
   getGoodSpuById,
   postGoods2Favorite,
-  postUserCarts
+  postUserCarts,
+  putGenerateShareResult
 }) => {
   const { spuId } = useParams()
   const [ open, setOpen ] = useState(false)
@@ -24,6 +25,12 @@ const spu = ({
       return Toast.fail("请选择商品规格")
     }
     await  postGoods2Favorite(spuId)
+  }
+  const handleShareGood = async () => {
+    if(curSkuId === null){
+      return Toast.fail("请选择商品规格")
+    }
+    await putGenerateShareResult(spuId)
   }
   const handleAdd2Cart = async () => {
     if(curSkuId === null){
@@ -76,14 +83,16 @@ const spu = ({
               })
             }
         </Card>
+        <Button size="small" type="warning" onClick={handleCreateOrder}
+          className={styles.operator_contain_item}>立即购买</Button>
       </div>
       <div className={styles.operator_contain}>
         <Button size="small" type="ghost" onClick={handleAdd2Favorite}
           className={styles.operator_contain_item}>收藏</Button>
         <Button size="small" type="primary" onClick={handleAdd2Cart}
           className={styles.operator_contain_item}>加入购物车</Button>
-        <Button size="small" type="warning" onClick={handleCreateOrder}
-          className={styles.operator_contain_item}>立即购买</Button>
+        <Button size="small" type="ghost" onClick={handleShareGood }
+          className={styles.operator_contain_item}>分享商品</Button>
       </div>
     </div>
   )

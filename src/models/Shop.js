@@ -8,6 +8,7 @@ import { getAllShopsReq } from '@/services/Shop.tsx';
 import { getAllSpuListReq, getGoodSpuByIdReq } from '@/services/Goods.tsx';
 import { postGoods2FavoriteReq } from '@/services/Favorite.tsx';
 import { postUserCartsReq } from '@/services/Cart.tsx';
+import { putGenerateShareResultReq } from '@/services/Share.tsx';
 import {
   defaultMapStateToProps,
   defaultMapDispatchToProps,
@@ -92,6 +93,13 @@ const model = {
           shopList: list,
         },
       });
+    },
+    *putGenerateShareResult({ payload }, { call, put }) {
+      const res = yield call(putGenerateShareResultReq, payload);
+      if (isCodeEqualOk(res) || isCodeEqualOk(res)) {
+        const { data } = res;
+        Toast.success('分享成功! 链接为' + data);
+      }
     },
     *refreshSpuList({ payload }, { call, put }) {
       yield put({

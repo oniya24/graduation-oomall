@@ -63,5 +63,5 @@ export const getRefundByIdReq = (id: number) => {
 
 /** 买家查询订单完整信息 */
 export const getOrderByIdReq = (id: number) => {
-  return request(`/orders/${id}`);
+  return request(`${paymentPrefix}/orders/${id}`);
 };
