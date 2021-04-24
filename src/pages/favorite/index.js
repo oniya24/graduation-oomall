@@ -43,9 +43,10 @@ const favorite = ({
     setDataSource(dataSource.cloneWithRows([...favoriteList]));
   }, [favoriteList]);
   function renderItem(rowData, sectionID, rowID) {
-    const { goodSku } = rowData;
-    const { name, skuSn, imageUrl, inventory, originalPrice, price } =
-      goodSku || {};
+    console.log(rowData);
+    const { goodsSku } = rowData;
+    const { name, skuSn, imageUrl, inventory, detail, originalPrice, price } =
+      goodsSku || {};
     return (
       <SwipeAction
         style={{ backgroundColor: 'gray' }}
@@ -65,6 +66,7 @@ const favorite = ({
         onClose={() => console.log('global close')}
       >
         <div key={rowID} className={styles.item_contain}>
+          <div style={{ marginBottom: '5px' }}>{name} </div>
           <div
             style={{ padding: '15px 0' }}
             className={styles.flex_row_space_around}
@@ -76,18 +78,12 @@ const favorite = ({
             />
             <div className={styles.flex_row_space_around}>
               <div className={styles.flex_column_space_around}>
-                <div style={{ marginBottom: '5px', fontSize: '1.2rem' }}>
-                  {' '}
-                  {name}{' '}
-                </div>
                 <p>剩余: {inventory}</p>
+                <p>详情: {detail}</p>
               </div>
               <div className={styles.flex_column_space_around}>
-                <span style={{ fontSize: '1rem', color: '#FF6E27' }}>
-                  {' '}
-                  现价:{price} ¥{' '}
-                </span>
-                <span> 原价:{originalPrice} ¥ </span>
+                <p style={{ color: '#FF6E27' }}>现价:{price} ¥ </p>
+                <p> 原价:{originalPrice} ¥ </p>
               </div>
             </div>
           </div>

@@ -14,6 +14,7 @@ import {
 } from '@/utils/reduxUtil.tsx';
 import { isErrnoEqual0, isCodeEqualOk } from '@/utils/validate';
 import { Toast } from 'antd-mobile';
+import { history } from 'umi';
 const namespace = 'payment';
 const model = {
   namespace,
@@ -40,6 +41,7 @@ const model = {
       const res = yield call(postPayRecordReq, payload);
       if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
         Toast.success('支付成功');
+        history.push('/my');
       }
     },
     *getPayRecordById({ payload }, { call, put }) {

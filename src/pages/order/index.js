@@ -10,6 +10,7 @@ const order = ({
   putOrderConfirmById,
   ...params
 }) => {
+  const { id: userId } = JSON.parse(sessionStorage.getItem('userInfo'));
   const ds = new ListView.DataSource({
     rowHasChanged: () => true,
   });
@@ -24,7 +25,9 @@ const order = ({
     putOrderConfirmById(id);
   };
   useEffect(() => {
-    getAllOrder();
+    getAllOrder({
+      userId: 7,
+    });
   }, []);
   useEffect(() => {
     console.log('reset');
@@ -60,10 +63,10 @@ const order = ({
         onClose={() => console.log('global close')}
       >
         <Card key={rowID} style={{ padding: '0 15px' }}>
-          <Card.Header title={skuSn} />
+          <Card.Header title={skuSn || '0000'} />
           <div style={{ padding: '15px 0' }}>
             <div>
-              <span>原价: {discountPrice}</span>
+              <span>原价: {discountPrice || 0}</span>
               <span
                 style={{
                   fontSize: '1.2rem',
@@ -71,11 +74,11 @@ const order = ({
                   color: '#FF6E27',
                 }}
               >
-                折后价: {discountPrice}¥
+                折后价: {discountPrice || 0}¥
               </span>
             </div>
-            <p>运费: {freightPrice}</p>
-            <p>购买类型: {orderTypePlain[orderType]}</p>
+            <p>运费: {freightPrice || 0}</p>
+            <p>购买类型: {orderTypePlain[orderType] || '暂无'}</p>
           </div>
           <Card.Footer
             content={

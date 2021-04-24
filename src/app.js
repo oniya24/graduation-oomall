@@ -12,7 +12,9 @@ export function render(oldRender) {
   }
   try {
     getUserReq()
-      .then(() => {
+      .then(res => {
+        const { data } = res;
+        sessionStorage.setItem('userInfo', JSON.stringify(data));
         oldRender();
       })
       .catch(e => {

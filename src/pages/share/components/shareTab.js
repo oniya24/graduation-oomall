@@ -61,7 +61,6 @@ const share_shareTab = ({ shareList, getAllShares }) => {
   };
   return (
     <div style={{ height: '100%', width: '100%' }}>
-      Content of first tab
       <ListView
         loading={false}
         dataSource={dataSource}

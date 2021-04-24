@@ -29,7 +29,7 @@ const payment = ({
     getOrderById(orderId);
   }, []);
   const hanldePaymentSubmit = async () => {
-    if (mode) {
+    if (!mode) {
       await postPayRecord({
         id: orderId,
         price: Number(discountPrice) + Number(freightPrice),
@@ -51,7 +51,11 @@ const payment = ({
         cancelButtonIndex: BUTTONS.length - 1,
         // destructiveButtonIndex: BUTTONS.length - 2,
         // title: 'title',
-        message: <Card>39.9</Card>,
+        message: (
+          <div>
+            支付金额: {Number(discountPrice) + Number(freightPrice) || 0} 元
+          </div>
+        ),
         maskClosable: true,
         'data-seed': 'logId',
         wrapProps,
