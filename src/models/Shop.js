@@ -98,7 +98,8 @@ const model = {
       const res = yield call(putGenerateShareResultReq, payload);
       if (isCodeEqualOk(res) || isCodeEqualOk(res)) {
         const { data } = res;
-        Toast.success('分享成功! 链接为' + data);
+        const { shareUrl } = data;
+        Toast.success('分享成功! 链接为' + shareUrl);
       }
     },
     *refreshSpuList({ payload }, { call, put }) {
