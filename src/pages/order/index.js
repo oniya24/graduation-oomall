@@ -63,20 +63,18 @@ const order = ({
         onClose={() => console.log('global close')}
       >
         <Card key={rowID} style={{ padding: '0 15px' }}>
-          <Card.Header title={skuSn || '0000'} />
+          <Card.Header title={'商品编号' + (skuSn || '0000')} />
           <div style={{ padding: '15px 0' }}>
-            <div>
-              <span>原价: {discountPrice || 0}</span>
-              <span
-                style={{
-                  fontSize: '1.2rem',
-                  margin: '0 10px',
-                  color: '#FF6E27',
-                }}
-              >
-                折后价: {discountPrice || 0}¥
-              </span>
-            </div>
+            <p>原价: {discountPrice || 0}</p>
+            <p
+              style={{
+                // fontSize: '1.2rem',
+                // margin: '0 10px',
+                color: '#FF6E27',
+              }}
+            >
+              折后价: {discountPrice || 0}¥
+            </p>
             <p>运费: {freightPrice || 0}</p>
             <p>购买类型: {orderTypePlain[orderType] || '暂无'}</p>
           </div>

@@ -6,7 +6,7 @@ import { paymentPrefix } from '@/consts/routers';
 
 /** 买家查询名下订单 */
 export const getAllOrderReq = (params: any) => {
-  return request(`${paymentPrefix}/orders`, {
+  return request(`/orders`, {
     method: 'get',
     params: params,
   });
