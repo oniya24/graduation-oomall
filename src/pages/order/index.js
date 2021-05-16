@@ -67,7 +67,7 @@ const order = ({
         <Card key={rowID} style={{ padding: '0 15px' }}>
           <Card.Header title={'商品编号' + (id || '0000')} />
           <div style={{ padding: '15px 0' }}>
-            <p>原价: {discountPrice || 0}</p>
+            <p>原价: {discountPrice || 0}</p> 
             <p
               style={{
                 // fontSize: '1.2rem',
