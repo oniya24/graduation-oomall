@@ -4,27 +4,40 @@ import { handleErrorMsg } from './utilReq/responseInterceptor';
 import { Toast } from 'antd-mobile';
 import { errorHandler } from './utilReq/errorHandler';
 import { getUserReq } from './services/User';
+import { orderPrefix } from '@/consts/routers';
+import { isErrnoEqual0, isCodeEqualOk } from '@/utils/validate';
 // import 'antd/dist/antd.css';
 
 export function render(oldRender) {
   if (history.location.pathname === '/') {
     history.push('/user');
+    return oldRender();
   }
-  try {
-    getUserReq()
-      .then(res => {
+  if (history.location.pathname === '/user') {
+    return oldRender();
+  }
+  let auth_Token = localStorage.getItem('authorization');
+  fetch(`${orderPrefix}/users`, {
+    headers: {
+      Accept: '*/*',
+      authorization: auth_Token,
+    },
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(res => {
+      console.log(res, 'res');
+      if (isErrnoEqual0(res) || isCodeEqualOk(res)) {
+        console.log('rs', res);
         const { data } = res;
         sessionStorage.setItem('userInfo', JSON.stringify(data));
-        oldRender();
-      })
-      .catch(e => {
+      } else {
         Toast.fail('请先登录');
         history.push('user');
-      });
-  } catch (e) {
-    Toast.fail('请先登录');
-    history.push('user');
-  }
+      }
+      oldRender();
+    });
 }
 
 export const request = {

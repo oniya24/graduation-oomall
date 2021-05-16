@@ -21,12 +21,13 @@ const payment = ({
   postAftersalePayRecordById,
   getPayRecordById,
 }) => {
+  const { id: userId } = JSON.parse(sessionStorage.getItem('userInfo'));
   const { query } = useLocation(); // 根据模式判断是售后 还是 正常订单
   const { orderId, mode } = query; // 根据模式判断是售后 还是 正常订单
   const [curPayPattern, setCurPayPattern] = useState(0);
   const { discountPrice, freightPrice } = orderDetail;
   useEffect(() => {
-    getOrderById(orderId);
+    getOrderById({ id: orderId });
   }, []);
   const hanldePaymentSubmit = async () => {
     if (!mode) {

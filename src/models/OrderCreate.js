@@ -25,7 +25,7 @@ const model = {
       if (isCodeEqualOk(res) || isErrnoEqual0(res)) {
         const { data } = res;
         Toast.success('订单创建成功，正在跳转到支付页');
-        history.push(`/payment/?orderId=${res}`);
+        history.push(`/payment/?orderId=${data}`);
         // 创建成功后跳转到支付页
       }
     },
