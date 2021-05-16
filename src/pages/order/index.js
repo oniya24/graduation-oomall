@@ -16,7 +16,9 @@ const order = ({
   });
   const [dataSource, setDataSource] = useState(ds);
   const onRequestMore = () => {
-    getAllOrder();
+    getAllOrder({
+      userId: userId,
+    });
   };
   const deleteOneRecord = ({ id }) => {
     deleteOrderById(id);
@@ -63,7 +65,7 @@ const order = ({
         onClose={() => console.log('global close')}
       >
         <Card key={rowID} style={{ padding: '0 15px' }}>
-          <Card.Header title={'商品编号' + (skuSn || '0000')} />
+          <Card.Header title={'商品编号' + (id || '0000')} />
           <div style={{ padding: '15px 0' }}>
             <p>原价: {discountPrice || 0}</p>
             <p
