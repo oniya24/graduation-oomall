@@ -26,7 +26,7 @@ const order = ({
   };
   useEffect(() => {
     getAllOrder({
-      userId: 7,
+      userId: userId,
     });
   }, []);
   useEffect(() => {
